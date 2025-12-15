@@ -63,6 +63,10 @@
     natural:  rgb("#FBF7F1"),
     bleached:  rgb("#FFFFFF"),
   ),
+  illinois: (
+    orange: rgb("#FF5F05"),
+    blue: rgb("#13294B"),
+  ),
   misc: (
     sepia:  rgb("#F7F0E4"),
     butter: rgb("#FBF7F1"),

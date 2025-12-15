@@ -8,6 +8,7 @@
 }
 
 #let nth(num) = {
+  num = int(num)
   let rem = calc.rem(num, 10)
   if num not in (11, 12, 13) {
     if rem == 1 { return str(num) + super[st] }
@@ -17,9 +18,13 @@
   return str(num) + super[th]
 }
 
-#let displaydate(date) = {
+#let displaydate(date, short: false) = {
   let year = date.display("[year]")
   let month = date.display("[month repr:long]")
   let day = date.display("[day padding:none]")
-  return nth(date.day()) + " of " + month + ", " + year
+  if short {
+    return month + " " + day + ", " + year
+  } else {
+    return nth(day) + " of " + month + ", " + year
+  }
 }

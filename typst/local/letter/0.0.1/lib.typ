@@ -3,7 +3,7 @@
 #import "@local/maths:0.0.1": *
 #import "@local/defs:0.0.1": *
 
-#let header = {
+#let header(thedate, salutation, object) = {
   // set text(  )
   place(
     float: true,
@@ -11,46 +11,64 @@
     [
       #box(
         image(width: 2.0in, "assets/illinois.pdf")
-        + v(4.0em)
+        + v(3.5em)
       )
       #h(1.0fr)
       #box[
         #set align(right)
-        The Grainger College of Engineering \
-        Siebel School for Computing and Data Science \
-        Siebel Center for Computer Science \
-        201 North Goodwin Avenue \
-        Urbana, IL 61801 USA
+        #set text(font: "Montserrat", fill: color.illinois.blue, weight: "medium", size: 9.0pt)
+        #text(weight: "semibold", size: 11.0pt)[THE GRAINGER COLLEGE OF ENGINEERING]
+        #v(- 0.5em)
+        // Siebel School for Computing and Data Science \
+        // Siebel Center for Computer Science \
+        // 201 North Goodwin Avenue \
+        // Urbana, IL 61801 USA
+        #smallcaps[
+          Siebel School for Computing and Data Science \
+          Siebel Center for Computer Science \
+          201 North Goodwin Avenue \
+          Urbana, IL 61801 USA
+        ]
       ]
     ]
   )
 }
 
-#let footer = {
+#let footer(author) = {
   place(
     float: true,
     left + bottom,
     [
       Sincerely,
 
+      #image(width: 1.0in, "assets/signature.pdf")
+
       #smallcaps[
-        #strong[Daniel Gonzalez Cedre, PhD] \
-        Assistant Teaching Professor \
-        Siebel School for Computing and Data Science \
-        University of Illinois Urbana-Champaign
+        #strong[#author, PhD] \
+        Teaching Assistant Professor
+        // Siebel School for Computing and Data Science \
+        // University of Illinois Urbana-Champaign
       ]
     ]
   )
+}
+
+#let format(doc, author, subject, object, salutation, date) = {
+  [
+  ]
+  set par(spacing: 1.8em)
+  doc
+  footer(author)
 }
 
 #let letter(
   title: [The Title],
   shorttitle: none,
   author: "Daniel Gonzalez Cedre",
+  subject: "RECOMMENDEE",
+  object: "ORGANIZATION",
+  salutation: "To whom it may concern at",
   date: datetime.today(),
-  publisher: none,
-  paper: "us-letter",
-  paper_color: "natural",
   doc
 ) = {
   set document(
@@ -60,13 +78,26 @@
   )
 
   set page(
-    paper: paper,
-    fill: if paper_color == "natural" { color.paper.natural } else { color.paper.bleached },
+    paper: "us-letter",
+    fill: color.paper.bleached,
     header: none,
-    footer: none,
+    footer: [
+      #text(font: "Montserrat", fill: color.illinois.orange, weight: "semibold", size: 11.0pt)[
+        UNIVERSITY OF ILLINOIS URBANA-CHAMPAIGN
+      ]
+      #h(1.0fr)
+      #text(font: "Montserrat", fill: color.illinois.blue, weight: "medium", size: 9.0pt)[
+        #smallcaps("CEDRE@ILLINOIS.EDU")
+      ]
+    ]
+,
   )
 
-  set par(justify: false)
+  set par(
+    justify: false,
+    // leading: 0.65em,
+    // spacing: 1.2em,
+  )
 
   set text( ..fonts.serif, size: 11.0pt )
   show raw: set text( ..fonts.mono, size: 9.0pt )
@@ -124,9 +155,12 @@
     )
   }
 
-  // show link: set text(luma(50))
 
-  header
-  doc
-  footer
+  [
+    #header(date, salutation, object)
+    #displaydate(date, short: true)
+    #v(0.65em)
+    #salutation #object,
+  ]
+  format(doc, author, subject, object, salutation, date)
 }
