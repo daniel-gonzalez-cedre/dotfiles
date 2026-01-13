@@ -8,6 +8,8 @@ source ~/.vim/vimrc/map/search.vimrc
 source ~/.vim/vimrc/map/toggle.vimrc
 source ~/.vim/vimrc/map/qol.vimrc
 
+source ~/.vim/vimrc/colors/gruvbox.vimrc
+source ~/.vim/vimrc/colors/gruvbox_material.vimrc
 source ~/.vim/vimrc/colors.vimrc
 
 source ~/.vim/vimrc/functions.vimrc
@@ -18,6 +20,7 @@ source ~/.vim/vimrc/pack/capslock.vimrc
 
 source ~/.vim/vimrc/pack/delimitmate.vimrc
 source ~/.vim/vimrc/pack/commentary.vimrc
+source ~/.vim/vimrc/pack/matchit.vimrc
 source ~/.vim/vimrc/pack/surround.vimrc
 
 source ~/.vim/vimrc/pack/fanfingtastic.vimrc

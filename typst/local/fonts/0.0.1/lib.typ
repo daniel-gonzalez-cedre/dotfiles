@@ -11,7 +11,7 @@
     tracking: sans-track()
   ),
   serif: (
-    font: "ETbb",
+    font: "Palatino Linotype",
     fill: color.off.black,
     number-type: "old-style",
     number-width: "proportional",

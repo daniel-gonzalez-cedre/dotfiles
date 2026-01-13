@@ -5,6 +5,14 @@
 
 #import "@preview/marge:0.1.0": sidenote
 
+#let red    = color.light.red
+#let green  = color.light.green
+#let blue   = color.light.blue
+#let yellow = color.light.yellow
+#let purple = color.light.purple
+#let orange = color.light.orange
+#let aqua   = color.light.aqua
+
 #let page-margin-right = (3.125in, 2.25in).at(1)
 #let fullwidth(content) = block(width: 100.0% + (page-margin-right - 1.0125in), content)
 
@@ -59,8 +67,8 @@
   shorttitle: none,
   author: "Daniel Gonzalez Cedre",
   date: datetime.today(),
+  due: false,
   publisher: none,
-  toc: true,
   bib: none,
   paper: "us-letter",
   paper_color: "natural",
@@ -68,6 +76,8 @@
   footer: none,
   doc
 ) = {
+  show: maths
+
   set document(
     title: title,
     author: author,
@@ -85,6 +95,8 @@
     justify: true,
     // leading: 0.65em,
   )
+
+  set smallcaps(all: true)
 
   show quote: set text( ..fonts.serif, size: 10.0pt, style: "italic" )
   show quote: set pad(left: 1in, right: 0in)
@@ -158,14 +170,25 @@
   set page(
     margin: (right: page-margin-right, rest: auto),
     header: context {
-      fullwidth(
-        emph(displaydate(date))
-        + h(1.0fr)
-        + smallcaps(lower(title))
-        + h(2.0em)
-        + counter(page).display()
-        + v(1.0em)
-      )
+      if due {
+        fullwidth(
+          text(style: "italic", color.blind.red)[Due: #displaydate(date)]
+          + h(1.0fr)
+          // + smallcaps(lower(title))
+          // + h(2.0em)
+          + counter(page).display()
+          + v(1.0em)
+        )
+      } else {
+        fullwidth(
+          emph(displaydate(date))
+          + h(1.0fr)
+          + smallcaps(lower(title))
+          + h(2.0em)
+          + counter(page).display()
+          + v(1.0em)
+        )
+      }
     }
   )
 

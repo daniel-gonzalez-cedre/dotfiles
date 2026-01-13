@@ -5,60 +5,12 @@
 
 #let header(thedate, salutation, object) = {
   // set text(  )
-  place(
-    float: true,
-    center + top,
-    [
-      #box(
-        image(width: 2.0in, "assets/illinois.pdf")
-        + v(3.5em)
-      )
-      #h(1.0fr)
-      #box[
-        #set align(right)
-        #set text(font: "Montserrat", fill: color.illinois.blue, weight: "medium", size: 9.0pt)
-        #text(weight: "semibold", size: 11.0pt)[THE GRAINGER COLLEGE OF ENGINEERING]
-        #v(- 0.5em)
-        // Siebel School for Computing and Data Science \
-        // Siebel Center for Computer Science \
-        // 201 North Goodwin Avenue \
-        // Urbana, IL 61801 USA
-        #smallcaps[
-          Siebel School for Computing and Data Science \
-          Siebel Center for Computer Science \
-          201 North Goodwin Avenue \
-          Urbana, IL 61801 USA
-        ]
-      ]
-    ]
-  )
 }
 
 #let footer(author) = {
-  place(
-    float: true,
-    left + bottom,
-    [
-      Sincerely,
-
-      #image(width: 1.0in, "assets/signature.pdf")
-
-      #smallcaps[
-        #strong[#author, PhD] \
-        Teaching Assistant Professor
-        // Siebel School for Computing and Data Science \
-        // University of Illinois Urbana-Champaign
-      ]
-    ]
-  )
 }
 
 #let format(doc, author, subject, object, salutation, date) = {
-  [
-  ]
-  set par(spacing: 1.8em)
-  doc
-  footer(author)
 }
 
 #let letter(
@@ -69,6 +21,10 @@
   object: "ORGANIZATION",
   salutation: "To whom it may concern at",
   date: datetime.today(),
+  fontsize: (
+    main: 11.0pt,
+    sub: 9.0pt,
+  ),
   doc
 ) = {
   set document(
@@ -82,27 +38,26 @@
     fill: color.paper.bleached,
     header: none,
     footer: [
-      #text(font: "Montserrat", fill: color.illinois.orange, weight: "semibold", size: 11.0pt)[
+      #text(font: "Montserrat", size: fontsize.main, fill: color.illinois.orange, weight: "semibold")[
         UNIVERSITY OF ILLINOIS URBANA-CHAMPAIGN
       ]
       #h(1.0fr)
-      #text(font: "Montserrat", fill: color.illinois.blue, weight: "medium", size: 9.0pt)[
+      #text(font: "Montserrat", size: fontsize.sub, fill: color.illinois.blue, weight: "medium")[
         #smallcaps("CEDRE@ILLINOIS.EDU")
       ]
     ]
-,
   )
 
-  set par(
-    justify: false,
-    // leading: 0.65em,
-    // spacing: 1.2em,
+  set text(
+    font: "ETbb",
+    size: fontsize.main,
+    // fill: color.off.black,
+    number-type: "old-style",
+    number-width: "proportional"
   )
+  show raw: set text( ..fonts.mono, size: fontsize.sub )
 
-  set text( ..fonts.serif, size: 11.0pt )
-  show raw: set text( ..fonts.mono, size: 9.0pt )
-
-  show quote: set text(size: 11.0pt, style: "italic")
+  show quote: set text(size: fontsize.main, style: "italic")
   set smallcaps(all: true)
   set underline(
     offset: 2.0pt,
@@ -114,7 +69,7 @@
 
   show figure: set figure.caption(separator: [.#h(0.5em)])
   show figure.caption: set align(left)
-  show figure.caption: set text( ..fonts.serif, size: 9.0pt )
+  show figure.caption: set text( ..fonts.serif, size: fontsize.sub )
 
   set enum(indent: 1.0em, body-indent: 1.0em)
   show enum: set par(justify: false)
@@ -128,39 +83,65 @@
   show figure.where(kind: raw): set figure(supplement: [Alg.], numbering: "1")
   show figure.where(kind: raw): set figure.caption(position: top)
 
-  set heading(numbering: "1.1")
-  show heading.where(level: 1): it => {
-    set text( ..fonts.serif, size: 18.0pt, style: "italic", weight: "bold" )
-    block(
-      above: 22.0pt,
-      below: 16.0pt,
-      llap[#counter(heading).display()#h(12.0pt)]
-      + it.body
-    )
-  }
-  show heading.where(level: 2): it => {
-    set text( ..fonts.serif, size: 13.0pt, style: "italic", weight: "bold" )
-    block(
-      above: 22.0pt,
-      below: 16.0pt,
-      llap[#counter(heading).display()#h(12.0pt)]
-      + it.body
-    )
-  }
-  show heading.where(level: 3): it => {
-    set text( ..fonts.serif, size: 11.0pt, style: "italic", weight: "regular" )
-    block(
-      llap[#counter(heading).display()#h(12.0pt)]
-      + it.body
-    )
-  }
+  place(
+    float: true,
+    center + top,
+  )[
+    #box(image(width: 2.0in, "assets/illinois.pdf") + v(0.4in))
+    #h(1.0fr)
+    #box[
+      #set align(right)
+      #set text(font: "Montserrat", fill: color.illinois.blue, weight: "medium", size: fontsize.sub)
+      #text(weight: "semibold", size: 11.0pt)[THE GRAINGER COLLEGE OF ENGINEERING] \
+      // Siebel School for Computing and Data Science \
+      // Siebel Center for Computer Science \
+      // 201 North Goodwin Avenue \
+      // Urbana, IL 61801 USA
+      #text(size: 8.0pt)[#smallcaps[
+        Siebel School for Computing and Data Science \
+        Siebel Center for Computer Science \
+        201 North Goodwin Avenue \
+        Urbana, IL 61801 USA
+      ]]
+    ]
+  ]
 
+  set par(
+    justify: false,
+    spacing: 1.6em,
+    leading: 0.8em,
+  )
+
+  show "Prof. ": [Prof.#sym.space.nobreak.narrow]
+  show "Dr. ": [Dr.#sym.space.nobreak.narrow]
+  show "Mrs. ": [Mrs.#sym.space.nobreak.narrow]
+  show "Ms. ": [Ms.#sym.space.nobreak.narrow]
+  show "Mr. ": [Mr.#sym.space.nobreak.narrow]
 
   [
-    #header(date, salutation, object)
     #displaydate(date, short: true)
-    #v(0.65em)
+
     #salutation #object,
+
+    #doc
   ]
-  format(doc, author, subject, object, salutation, date)
+
+  place(
+    float: true,
+    left + bottom,
+  )[
+    Sincerely,
+    #v(- 0.4em)
+    #image(
+      height: 3.6em,
+      fit: "contain",
+      "assets/signature.pdf"
+    )
+    #v(- 1.2em)
+    #smallcaps[
+      #author, PhD \
+      Teaching Assistant Professor
+      // Siebel School for Computing and Data Science
+    ]
+  ]
 }

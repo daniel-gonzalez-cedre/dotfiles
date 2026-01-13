@@ -7,6 +7,7 @@ augroup set_settings | au!
   au BufEnter * set shiftwidth=2
   au BufEnter * set softtabstop=2
   au BufEnter * set tabstop=8
+  au BufEnter * set textwidth=0
 augroup END
 
 set background=dark
@@ -51,7 +52,6 @@ set breakindent
 set breakindentopt=sbr
 set linebreak
 set sidescroll=10
-set textwidth=0
 " set list
 " set listchars=nbsp:_,eol:⋅
 " " set listchars=multispace:_,nbsp:_,eol:$

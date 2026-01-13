@@ -1,3 +1,8 @@
+#let opacity(colorname, a) = {
+  let (r, g, b, _) = color.components(colorname)
+  return rgb(r, g, b, a)
+}
+
 #let color = (
   white: rgb("#FBF7F1"),
   black: rgb("#141617"),
@@ -19,13 +24,13 @@
     black:    rgb("#141617"),
     blackish: rgb("#252422"),
 
-    red:    rgb("#EA6962"),
-    green:  rgb("#A9B665"),
-    blue:   rgb("#7DAEA3"),
-    yellow: rgb("#D8A657"),
-    purple: rgb("#D3869B"),
-    orange: rgb("#E78A4E"),
-    aqua:   rgb("#89B482"),
+    red:    rgb("#C14A4A"),
+    green:  rgb("#6C782E"),
+    blue:   rgb("#45707A"),
+    yellow: rgb("#B47109"),
+    purple: rgb("#945E80"),
+    orange: rgb("#C35E0A"),
+    aqua:   rgb("#4C7A5D"),
   ),
   dark: (
     bg0: rgb("#252423"),

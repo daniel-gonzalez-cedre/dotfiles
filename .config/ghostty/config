@@ -70,9 +70,12 @@ keybind = global:ctrl+q=toggle_quick_terminal
 # keybind = global:ctrl+shift+t=toggle_quick_terminal
 # keybind = global:ctrl+shift+q=toggle_quick_terminal
 
+
 keybind = ctrl+enter=unbind
 keybind = ctrl+tab=unbind
 keybind = shift+ctrl+tab=unbind
+
+keybind = super+r=prompt_surface_title
 
 keybind = super+z=toggle_split_zoom
 keybind = super+enter=toggle_split_zoom

@@ -116,6 +116,11 @@ if has('clipboard')
    noremap D  "+D
   nnoremap dd "+dd
 
-  noremap p "+p
-  noremap P "+P
+   noremap x  "_x
+
+  nnoremap p "+p
+  nnoremap P "+P
+
+  nnoremap p "+P
+  vnoremap P "+p
 endif

@@ -3,64 +3,9 @@
 #import "@local/maths:0.0.1": *
 #import "@local/defs:0.0.1": *
 
-#import "@preview/marge:0.1.0": sidenote
+#import "@local/tables:0.0.1": *
 
-#let page-margin-right = (3.125in, 2.525in).at(0)
-#let fullwidth(content) = block(width: 100.0% + (page-margin-right - 1.0125in), content)
-
-#let apostille( ..args ) = {
-  set text(size: 11.0pt, style: "italic")
-  sidenote(
-    dy: 0.0pt,
-    side: left,
-    numbering: none,
-    format: it => {
-      set align(right)
-      it.default
-    },
-    ..args
-  )
-}
-#let marginale( ..args ) = {
-  set text(size: 11.0pt)
-  sidenote(
-    dy: 1.0pt,
-    side: right,
-    numbering: none,
-    padding: (
-      left: 2.0em,
-      right: 5.0em
-    ),
-    format: it => {
-      // set par(leading: 0.65em)
-      it.default
-    },
-    ..args
-  )
-}
-#let marginalis( ..args ) = {
-  set text(size: 11.0pt)
-  sidenote(
-    dy: 1.0pt,
-    side: right,
-    numbering: "1",
-    padding: (
-      left: 2.0em,
-      right: 5.0em
-    ),
-    format: it => {
-      // set par(leading: 0.65em)
-      it.default
-    },
-    ..args
-  )
-}
-
-#let sidefigure( fig, dy: 0.0pt, caption: none ) = {
-  marginale(dy: dy)[
-    #box( figure( fig, caption: caption ) )
-  ]
-}
+#import "@local/margins:0.0.1": *
 
 #let coverauthorblock(author) = {
   place(top + left, {
@@ -122,7 +67,6 @@
     //   }
     // },
   )
-
   doc
 }
 
@@ -156,6 +100,7 @@
   show quote.where(block: true): it => {
     set par(justify: false)
     set align(left)
+    set block(above: 28.0pt, below: 28.0pt)
     pad(
       left: 1.0in,
       right: 0.0in,
@@ -232,43 +177,11 @@
   set list(indent: 1.0em, body-indent: 1.0em)
   show list: set par(justify: false)
 
+  show: tables
+
   // show figure: set figure.caption(separator: [.#h(0.5em)])
   show figure.caption: set align(left)
   // show figure.caption: set text( ..fonts.serif, size: 9.0pt )
-
-
-  set table(align: (x, y) => { if y == 0 { horizon + center } else { horizon + left } })
-  show table: set text(size: 9.0pt)
-  show figure.where(kind: table): set figure(supplement: [Table], numbering: "1.")
-  show figure.where(kind: table): set block(above: 0.0pt, below: 0.0pt)
-  show figure.where(kind: table): set table.hline(stroke: (thickness: 0.375pt, cap: "round"))
-  show figure.where(kind: table): set table(stroke: (x, y) => (
-    left: none,
-    right: none,
-    top: if y == 1 { none } else { 0.0pt },
-    bottom: stroke(
-      paint: color.off.black,
-      thickness: 0.8pt,
-      cap: "round"
-    )
-  ))
-  show table.cell: it => { if it.y == 0 { smallcaps(it) } else { it } }
-  show figure.where(kind: table): set figure.caption(position: top)
-  show figure.caption.where(kind: table): it => {
-    sidenote(
-      dy: 1.2em,
-      side: right,
-      numbering: none,
-      padding: (
-        left: 2.0em,
-        right: 5.0em
-      )
-    )[
-      #it.supplement
-      #context it.counter.display(it.numbering)
-      #it.body
-    ]
-  }
 
   show figure.where(kind: image): set figure(supplement: [Figure], numbering: "1.")
   show figure.where(kind: image): set figure.caption(position: bottom, separator: [ ])
@@ -291,7 +204,7 @@
   pagebreak()
 
   show heading.where(level: 1): it => {
-    set text( ..fonts.serif, size: 22.0pt, style: "italic" )
+    set text( ..fonts.serif, size: 22.0pt, style: "italic", weight: "bold" )
     block(
       v(32.0pt + 48.0pt)
       + it.body
@@ -354,7 +267,7 @@
   show heading.where(level: 1): it => {
     set text( ..fonts.serif, size: 22.0pt, style: "italic", weight: "bold" )
     block(
-      below: 18.0pt,
+      below: 28.0pt,
       v(78.0pt)
       + counter(heading).display()
       + v(1.2em, weak: true)
@@ -362,20 +275,24 @@
     )
   }
   show heading.where(level: 2): it => {
-    set text( ..fonts.serif, size: 13.0pt, style: "italic", weight: "bold" )
+    set text( ..fonts.serif, size: 14.0pt, style: "italic", weight: "bold" )
     block(
-      above: 22.0pt,
+      above: 28.0pt,
       below: 16.0pt,
-      llap[ #counter(heading).display() #h(12.0pt) ]
+      llap[ #counter(heading).display() #h(11.0pt) ]
       + it.body
     )
   }
   show heading.where(level: 3): it => {
-    set text( ..fonts.serif, size: 11.0pt, style: "italic", weight: "bold" )
+    set text( ..fonts.serif, size: 12.0pt, style: "italic", weight: "bold" )
     block(
-      llap[ #counter(heading).display() #h(12.0pt) ]
-      + it.body
+      above: 28.0pt,
+      below: 16.0pt,
+      // llap[ #counter(heading).display() #h(11.0pt) ]
+      // + it.body
+      it.body
     )
+    // block( it.body )
   }
 
   show link: set text(luma(50))

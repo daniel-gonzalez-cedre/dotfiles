@@ -1,6 +1,6 @@
 #import "@local/colors:0.0.1": *
 #import "@local/fonts:0.0.1": *
-#import "@local/defs:0.0.1": llap
+#import "@local/defs:0.0.1": *
 
 #let maths(doc) = {
   show math.gt.eq: math.gt.eq.slant
@@ -8,6 +8,10 @@
 
   show math.nothing: math.diameter
   show math.emptyset: math.diameter
+
+  // show "Erdos": [Erdo#(dia.acute.double)s]
+  show "Erdos": [Erd#(diacritic.acute.double)[o]s]
+  show "Godel": [G#(diacritic.umlaut)[o]del]
 
   doc
 }
@@ -17,6 +21,8 @@
 #let norm(x) = math.bar.v.double + x + math.bar.v.double
 #let suc(n) = math.frak("suc") + "(" + n + ")"
 #let nat(n) = math.lr(sym.bracket.l.stroked) + n + math.lr(sym.bracket.r.stroked)
+
+// #let intersection = math.inter
 
 #let string(finite: true, content) = {
   let ellipsis = if finite {
