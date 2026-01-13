@@ -1,0 +1,4 @@
+[package]
+name = "tables"
+version = "0.0.1"
+entrypoint = "lib.typ"
