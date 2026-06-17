@@ -39,13 +39,27 @@
   return str(num) + super[th]
 }
 
-#let displaydate(date, short: false) = {
-  let year = date.display("[year]")
-  let month = date.display("[month repr:long]")
-  let day = date.display("[day padding:none]")
-  if short {
-    return month + " " + day + ", " + year
+#let displaydate(date, short: false, long: false, year: true) = {
+  if year {
+    let year = date.display("[year]")
+    let month = date.display("[month repr:long]")
+    let day = date.display("[day padding:none]")
+    if short {
+      return month + " " + day + ", " + year
+    } else if long {
+      return nth(day) + " day of " + month + " of the year of our Lord " + year
+    } else {
+      return nth(day) + " of " + month + ", " + year
+    }
   } else {
-    return nth(day) + " of " + month + ", " + year
+    let month = date.display("[month repr:long]")
+    let day = date.display("[day padding:none]")
+    if short {
+      return month + " " + day
+    } else if long {
+      return nth(day) + " day of " + month
+    } else {
+      return nth(day) + " of " + month
+    }
   }
 }

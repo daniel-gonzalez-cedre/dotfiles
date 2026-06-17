@@ -121,6 +121,6 @@ if has('clipboard')
   nnoremap p "+p
   nnoremap P "+P
 
-  nnoremap p "+P
+  vnoremap p "+P
   vnoremap P "+p
 endif

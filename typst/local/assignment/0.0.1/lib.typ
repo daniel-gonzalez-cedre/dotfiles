@@ -18,69 +18,42 @@
 #let page-margin-right = (3.125in, 2.25in).at(1)
 #let fullwidth(content) = block(width: 100.0% + (page-margin-right - 1.0125in), content)
 
-// #let apostille( ..args ) = {
-//   set text(size: 11.0pt, style: "italic")
-//   sidenote(
-//     dy: 1.0pt,
-//     numbering: none,
-//     side: left,
-//     format: it => {
-//       set align(right)
-//       it.default
-//     },
-//     ..args
-//   )
-// }
-// #let marginale( ..args ) = {
-//   set text(size: 11.0pt)
-//   sidenote(
-//     dy: 1.0pt,
-//     numbering: none,
-//     padding: (
-//       left: 2.0em,
-//       right: 4.0em
-//     ),
-//     format: it => { it.default },
-//     ..args
-//   )
-// }
-// #let marginalis( ..args ) = {
-//   set text(size: 11.0pt)
-//   sidenote(
-//     dy: 1.0pt,
-//     numbering: "1",
-//     padding: (
-//       left: 2.0em,
-//       right: 4.0em
-//     ),
-//     format: it => { it.default },
-//     ..args
-//   )
-// }
-
-// #let sidefigure( fig, dy: 0.0pt, caption: none ) = {
-//   marginale(dy: dy)[
-//     #box( figure( fig, caption: caption ) )
-//   ]
-// }
-
 #let assignment(
   shorttitle: none,
   author: "Daniel Gonzalez Cedre",
   title: [The Title],
   course: [The Course],
+  type: "",
+  number: 0,
   date: datetime.today(),
-  due: false,
-  publisher: none,
-  bib: none,
   paper: "us-letter",
   paper_color: "natural",
-  header: none,
-  footer: none,
   doc
 ) = {
   show: maths
   set math.lr(size: 115%)
+
+  let title = ""
+  let thedate = ""
+  if type in ("ps", "problem set") {
+    title = [ Problem Set #number ]
+    thedate = [ Due on the #text(fill: red)[#displaydate(date, long: true)] at 11:59 pm ]
+  } else if type in ("ss", "solution set") {
+    title = [ Solution Set #number ]
+    thedate = [ #displaydate(date, long: true) ]
+  } else if type in ("rs", "exercise set") {
+    title = [ Exercise Set #number ]
+    thedate = [ #displaydate(date, long: true) ]
+  } else if type in ("es", "esoterica") {
+    title = [ Esoterica #number ]
+    thedate = [ #displaydate(date, long: true) ]
+  } else if type in ("xs", "exoterica") {
+    title = [ Exoterica #number ]
+    thedate = [ #displaydate(date, long: true) ]
+  } else {
+    title = ""
+    thedate = [ #displaydate(date, long: true) ]
+  }
 
   set document(
     title: title,
@@ -115,7 +88,7 @@
     )
   }
 
-  set text( ..fonts.serif, size: 11.0pt )
+  set text( ..fonts.serif, size: 10.0pt )
   show raw: set text( ..fonts.mono, size: 9.0pt )
 
   set underline(
@@ -131,6 +104,8 @@
   show figure.caption: set text( ..fonts.serif, size: 9.0pt )
 
   set enum(numbering: "1.a.i.")
+  set list(marker: sym.bullet.hyph)
+  // set list(marker: sym.dot.c)
   // set enum(indent: 0.0em, body-indent: 1.0em)
   // show enum: set par(justify: false)
 
@@ -176,21 +151,24 @@
   show heading.where(level: 3): it => {
     set text( ..fonts.serif, size: 12.0pt, style: "italic", weight: "regular" )
     block(
-      above: 22.0pt,
+      above: 11.0pt,
+      below: 24.0pt,
+      it.body
+    )
+  }
+  show heading.where(level: 4): it => {
+    set text( ..fonts.serif, size: 12.0pt, style: "italic", weight: "regular" )
+    block(
+      above: 24.0pt,
       below: 16.0pt,
       it.body
     )
   }
 
-  // show link: set text(luma(50))
-
-  doc
-
-  show bibliography: set text( ..fonts.serif, size: 9.0pt )
-  show bibliography: set par(justify: false)
-  set bibliography(title: none)
-  if bib != none {
-    heading(level: 1, [Bibliography])
-    bib
-  }
+  [
+    = #title
+    == #course
+    === #thedate
+    #doc
+  ]
 }

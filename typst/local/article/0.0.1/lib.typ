@@ -3,80 +3,34 @@
 #import "@local/maths:0.0.1": *
 #import "@local/defs:0.0.1": *
 
-#import "@preview/marge:0.1.0": sidenote
+#import "@local/margins:0.0.1": *
 
-#let red    = color.light.red
-#let green  = color.light.green
-#let blue   = color.light.blue
-#let yellow = color.light.yellow
-#let purple = color.light.purple
-#let orange = color.light.orange
-#let aqua   = color.light.aqua
+#let red    = color.blind.red
+#let green  = color.blind.green
+#let blue   = color.blind.blue
+#let yellow = color.blind.yellow
+#let purple = color.blind.purple
+#let orange = color.blind.orange
+// #let aqua   = color.light.aqua
 
 #let page-margin-right = (3.125in, 2.25in).at(1)
 #let fullwidth(content) = block(width: 100.0% + (page-margin-right - 1.0125in), content)
-
-#let apostille( ..args ) = {
-  set text(size: 11.0pt, style: "italic")
-  sidenote(
-    dy: 1.0pt,
-    numbering: none,
-    side: left,
-    format: it => {
-      set align(right)
-      it.default
-    },
-    ..args
-  )
-}
-#let marginale( ..args ) = {
-  set text(size: 11.0pt)
-  sidenote(
-    dy: 1.0pt,
-    numbering: none,
-    padding: (
-      left: 2.0em,
-      right: 4.0em
-    ),
-    format: it => { it.default },
-    ..args
-  )
-}
-#let marginalis( ..args ) = {
-  set text(size: 11.0pt)
-  sidenote(
-    dy: 1.0pt,
-    numbering: "1",
-    padding: (
-      left: 2.0em,
-      right: 4.0em
-    ),
-    format: it => { it.default },
-    ..args
-  )
-}
-
-#let sidefigure( fig, dy: 0.0pt, caption: none ) = {
-  marginale(dy: dy)[
-    #box( figure( fig, caption: caption ) )
-  ]
-}
 
 #let article(
   title: [The Title],
   shorttitle: none,
   author: "Daniel Gonzalez Cedre",
+  type: "",
+  number: 1,
+  numbering: true,
   date: datetime.today(),
-  due: false,
-  publisher: none,
-  bib: none,
   paper: "us-letter",
   paper_color: "natural",
-  header: none,
-  footer: none,
+  bib: none,
   doc
 ) = {
   show: maths
+  set math.lr(size: 115%)
 
   set document(
     title: title,
@@ -114,7 +68,7 @@
     )
   }
 
-  set text( ..fonts.serif, size: 11.0pt )
+  set text( ..fonts.serif, size: 10.0pt )
   show raw: set text( ..fonts.mono, size: 9.0pt )
 
   set underline(
@@ -132,6 +86,7 @@
   set enum(indent: 1.0em, body-indent: 1.0em)
   show enum: set par(justify: false)
 
+  set list(marker: sym.bullet.hyph)
   set list(indent: 1.0em, body-indent: 1.0em)
   show list: set par(justify: false)
 
@@ -170,36 +125,40 @@
   set page(
     margin: (right: page-margin-right, rest: auto),
     header: context {
-      if due {
-        fullwidth(
-          text(style: "italic", color.blind.red)[Due: #displaydate(date)]
-          + h(1.0fr)
-          // + smallcaps(lower(title))
-          // + h(2.0em)
-          + counter(page).display()
-          + v(1.0em)
-        )
-      } else {
+      // if due {
+      //   fullwidth(
+      //     text(style: "italic", color.blind.red)[Due: #displaydate(date)]
+      //     + h(1.0fr)
+      //     // + sc(lower(title))
+      //     // + h(2.0em)
+      //     + counter(page).display()
+      //     + v(1.0em)
+      //   )
+      // } else {
         fullwidth(
           emph(displaydate(date))
           + h(1.0fr)
-          + smallcaps(lower(title))
+          + sc(lower(title))
           + h(2.0em)
           + counter(page).display()
           + v(1.0em)
         )
-      }
+      // }
     }
   )
 
+  counter(heading).update(number - 1)
   set heading(numbering: "1.1")
   show heading.where(level: 1): it => {
     set text( ..fonts.serif, size: 18.0pt, style: "italic", weight: "bold" )
     block(
       above: 22.0pt,
       below: 16.0pt,
-      llap[#counter(heading).display()#h(12.0pt)]
-      + it.body
+      if numbering {
+        llap[#counter(heading).display()#h(12.0pt)] + it.body
+      } else {
+        it.body
+      }
     )
   }
   show heading.where(level: 2): it => {
@@ -207,15 +166,21 @@
     block(
       above: 22.0pt,
       below: 16.0pt,
-      llap[#counter(heading).display()#h(12.0pt)]
-      + it.body
+      if numbering {
+        llap[#counter(heading).display()#h(12.0pt)] + it.body
+      } else {
+        it.body
+      }
     )
   }
   show heading.where(level: 3): it => {
-    set text( ..fonts.serif, size: 11.0pt, style: "italic", weight: "regular" )
+    set text( ..fonts.serif, size: 12.0pt, style: "italic", weight: "regular" )
     block(
-      llap[#counter(heading).display()#h(12.0pt)]
-      + it.body
+      if numbering {
+        llap[#counter(heading).display()#h(12.0pt)] + it.body
+      } else {
+        it.body
+      }
     )
   }
 

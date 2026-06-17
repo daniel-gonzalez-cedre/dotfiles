@@ -1135,7 +1135,7 @@
   \begin{center}
     \setlength\tabcolsep{\acvEntriesColSep}
     \setlength{\extrarowheight}{0.0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.4}} R{\textwidth * \real{0.275}} L{\textwidth * \real{0.225}}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.325}} R{\textwidth * \real{0.3}} L{\textwidth * \real{0.275}}}
     % \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9125}}}
     % \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.4}} L{\textwidth * \real{0.125}} L{\textwidth * \real{0.275}}}
 }{%

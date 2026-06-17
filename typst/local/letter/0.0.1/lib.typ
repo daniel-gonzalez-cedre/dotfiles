@@ -19,12 +19,14 @@
   author: "Daniel Gonzalez Cedre",
   subject: "RECOMMENDEE",
   object: "ORGANIZATION",
-  salutation: "To whom it may concern at",
+  salutation: "To whom it may concern",
+  headspace: 0.0em,
+  interspace: 0.0em,
+  footspace: 0.0em,
   date: datetime.today(),
-  fontsize: (
-    main: 11.0pt,
-    sub: 9.0pt,
-  ),
+  main: 11.0pt,
+  sub: 9.0pt,
+  margin: 0.0pt,
   doc
 ) = {
   set document(
@@ -33,12 +35,18 @@
     date: date,
   )
 
+  let fontsize = (
+    main: main,
+    sub: sub,
+    footer: 11.0pt
+  )
+
   set page(
     paper: "us-letter",
     fill: color.paper.bleached,
     header: none,
     footer: [
-      #text(font: "Montserrat", size: fontsize.main, fill: color.illinois.orange, weight: "semibold")[
+      #text(font: "Montserrat", size: fontsize.footer, fill: color.illinois.orange, weight: "semibold")[
         UNIVERSITY OF ILLINOIS URBANA-CHAMPAIGN
       ]
       #h(1.0fr)
@@ -107,7 +115,7 @@
   ]
 
   set par(
-    justify: false,
+    justify: true,
     spacing: 1.6em,
     leading: 0.8em,
   )
@@ -118,30 +126,36 @@
   show "Ms. ": [Ms.#sym.space.nobreak.narrow]
   show "Mr. ": [Mr.#sym.space.nobreak.narrow]
 
+  if object != "" {
+    salutation = salutation + " at "
+  }
+
   [
-    #displaydate(date, short: true)
-
-    #salutation #object,
-
-    #doc
-  ]
-
-  place(
-    float: true,
-    left + bottom,
-  )[
+    // #displaydate(date, short: true)
+    #v(headspace)
+    #pad(margin)[
+      #salutation#object,
+      #v(interspace)
+      #doc
+    ]
+    #v(footspace)
     Sincerely,
-    #v(- 0.4em)
+    // #v(- 0.4em)
     #image(
       height: 3.6em,
       fit: "contain",
       "assets/signature.pdf"
     )
-    #v(- 1.2em)
+    // #v(- 1.2em)
     #smallcaps[
       #author, PhD \
       Teaching Assistant Professor
       // Siebel School for Computing and Data Science
     ]
+    // #place(
+    //   float: false,
+    //   // left + bottom,
+    // )[
+    // ]
   ]
 }

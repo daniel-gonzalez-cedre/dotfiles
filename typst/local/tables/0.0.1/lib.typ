@@ -10,7 +10,7 @@
 
   show table: set text(size: 9.0pt)
 
-  show figure.where(kind: table): set figure(supplement: [Table], numbering: "1.")
+  show figure.where(kind: table): set figure(supplement: [Tab.], numbering: "1.")
   show figure.where(kind: table): set block(above: 0.0pt, below: 0.0pt)
   show figure.where(kind: table): set table.hline(stroke: (thickness: 0.375pt, cap: "round"))
   show figure.where(kind: table): set table(stroke: (x, y) => (

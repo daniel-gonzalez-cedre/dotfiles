@@ -191,7 +191,7 @@ function prompt_venv_post() {
   if [[ -z "$VIRTUAL_ENV" ]]; then
     echo ""
   else
-    echo " ${fgcode[$1]}${bgcode[$2]} "
+    echo " ${fgcode[$1]}${bgcode[$2]}"
   fi
 }
 
@@ -262,7 +262,7 @@ export GREP_OPTIONS="--color=auto"  # --line-buffered
 
 export CONFIG=${HOME}/config
 
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ] && [ "$TERM_PROGRAM" != "WezTerm" ] && [ "$TERM_PROGRAM" != "iTerm.app" ]; then
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ] && [ "$TERM_PROGRAM" != "WezTerm" ] && [ "$TERM_PROGRAM" != "iTerm.app" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
   export TERM=xterm-ghostty
 else
   export TERM=xterm-256color
@@ -386,7 +386,8 @@ alias python='python3'
 alias pdfcrop='/Library/TeX/texbin/pdfcrop'
 # alias mpv='open -a /Applications/mpv.app/'
 # alias istats='watch -n 0 --color istats'
-alias storage='watch -n 1 --color df -h'
+# alias storage='watch -n 1 --color df -h'
+alias storage='duf'
 alias hhkb='open -a hhkb-keymap-tool'
 
 # $1: <options>

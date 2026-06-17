@@ -20,6 +20,13 @@
 #let orange = color.blind.orange
 // #let aqua   = color.blind.aqua
 
+#let hyperlink( ..args ) = text(
+  ..fonts.mono,
+  fill: color.blind.blue,
+  size: (9 / 11) * 1.0em,
+  link( ..args )
+)
+
 #let quotation(attribution: none, content) = {
   show quote: set text( ..fonts.serif, size: 9.0pt, style: "italic" )
   show quote.where(block: true): it => {
@@ -46,7 +53,7 @@
 }
 
 #let abstract(body) = {
-  set text(size: 9.0pt)
+  // set text(size: 9.0pt)
   fullwidth[
     #pad(12.0pt)[
       // #set text(size: 9.0pt)
@@ -85,6 +92,8 @@
     // leading: 0.65em,
   )
 
+  // show link: text.with( ..fonts.mono, fill: color.blind.blue, size: (9 / 11) * 1.0em )
+
   set smallcaps(all: true)
 
   show quote: set text( ..fonts.serif, size: 10.0pt, style: "italic" )
@@ -103,7 +112,7 @@
   //   )
   // }
 
-  set text( ..fonts.serif, size: 11.0pt )
+  set text( ..fonts.serif, size: 10.0pt )
   show raw: set text( ..fonts.mono, size: 9.0pt )
 
   set underline(
@@ -116,7 +125,7 @@
 
   show figure: set figure.caption(separator: [.#h(0.5em)])
   show figure.caption: set align(left)
-  show figure.caption: set text( ..fonts.serif, size: 9.0pt )
+  // show figure.caption: set text( ..fonts.serif, size: 1.0em )
 
   set enum(indent: 1.0em, body-indent: 1.0em)
   show enum: set par(justify: false)
@@ -151,32 +160,6 @@
       #it.body
     ]
   }
-
-  // show heading.where(level: 1): it => {
-  //   set text( ..fonts.serif, size: 22.0pt, style: "italic" )
-  //   block(
-  //     v(32.0pt + 48.0pt)
-  //     + it.body
-  //   )
-  // }
-  // show outline.entry.where(level: 1): set block(above: 32.0pt, below: 12.0pt)
-  // show outline.entry.where(level: 1): set text( ..fonts.serif, size: 16.0pt, style: "italic" )
-  // show outline.entry.where(level: 1): it => link(
-  //   it.element.location(),
-  //   it.indented( it.prefix(), [ #it.body() #h(1.0fr) #text(style: "normal", it.page()) ] ),
-  // )
-  // show outline.entry.where(level: 2): set block(above: 8.0pt, below: 8.0pt)
-  // show outline.entry.where(level: 2): set text( ..fonts.serif, size: 11.0pt, style: "italic" )
-  // show outline.entry.where(level: 2): it => link(
-  //   it.element.location(),
-  //   it.indented( it.prefix(), [ #it.body() #h(1.0fr) #text(style: "normal", it.page()) ] ),
-  // )
-  // show outline.entry.where(level: 3): set block(above: 8.0pt, below: 8.0pt)
-  // show outline.entry.where(level: 3): set text( ..fonts.serif, size: 11.0pt, style: "italic" )
-  // show outline.entry.where(level: 3): it => link(
-  //   it.element.location(),
-  //   it.indented( hide(it.prefix()), [ #it.body() #h(1.0fr) #text(style: "normal", it.page()) ] ),
-  // )
 
   set page(
     margin: (right: page-margin-right, rest: auto),
@@ -219,8 +202,11 @@
   show heading.where(level: 3): it => {
     set text( ..fonts.serif, size: 11.0pt, style: "italic", weight: "regular" )
     block(
-      llap[#counter(heading).display()#h(12.0pt)]
-      + it.body
+      above: 22.0pt,
+      below: 16.0pt,
+      it.body
+      // llap[#counter(heading).display()#h(12.0pt)]
+      // + it.body
     )
   }
 

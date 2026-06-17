@@ -34,7 +34,7 @@ source ~/.vim/vimrc/pack/nrrwrgn.vimrc
 source ~/.vim/vimrc/pack/tabular.vimrc
 
 source ~/.vim/vimrc/set.vimrc
-" source ~/.vim/vimrc/filetypes.vimrc
+source ~/.vim/vimrc/filetypes.vimrc
 
 augroup jump_settings | au!
   au VimEnter * :clearjumps

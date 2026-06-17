@@ -7,22 +7,24 @@
 #let fullwidth(content) = block(width: 100.0% + (page-margin-right - 1.0125in), content)
 
 #let apostille( ..args ) = {
-  set text(size: 11.0pt, style: "italic")
+  set text(size: 10.0pt, style: "italic")
   sidenote(
     dy: 0.0pt,
+    gap: 0.0em,
     side: left,
     numbering: none,
     format: it => {
-      set align(right)
+      // set align(right)
       it.default
     },
     ..args
   )
 }
 #let marginale( ..args ) = {
-  set text(size: 11.0pt)
+  set text(size: 10.0pt)
   sidenote(
-    dy: 1.0pt,
+    dy: 0.0pt,
+    gap: 0.0em,
     side: right,
     numbering: none,
     padding: (
@@ -37,9 +39,10 @@
   )
 }
 #let marginalis( ..args ) = {
-  set text(size: 11.0pt)
+  set text(size: 10.0pt)
   sidenote(
-    // dy: 1.0pt,
+    dy: 0.0pt,
+    gap: 0.0em,
     side: right,
     numbering: "1",
     padding: (
