@@ -8,6 +8,8 @@ autoload -Uz compinit && compinit
 # source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # # source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+setopt noincappendhistory
+setopt nosharehistory
 setopt histignoredups
 setopt promptsubst
 setopt promptpercent
@@ -253,8 +255,9 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-export EDITOR='vim'
 # export VISUAL='vim'
+export EDITOR='vim'
+export MANPAGER='vim +MANPAGER -'
 
 export CLICOLOR=1
 # export GREP_COLORS='sl=49;39:cx=49;39:mt=49;31;1:fn=49;32:ln=49;33:bn=49;33:se=1;36'

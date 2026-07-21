@@ -1,7 +1,7 @@
 #import "@local/colors:0.0.1": *
 #import "@local/fonts:0.0.1": *
 
-#import "@local/margins:0.0.1": sidenote
+// #import "@local/margins:0.0.1": sidenote
 
 #let tables(
   doc
@@ -31,21 +31,21 @@
   ))
 
   show figure.where(kind: table): set figure.caption(position: top)
-  show figure.caption.where(kind: table): it => {
-    sidenote(
-      dy: 2.0em,
-      side: right,
-      numbering: none,
-      padding: (
-        left: 2.0em,
-        right: 5.0em
-      )
-    )[
-      #it.supplement
-      #context it.counter.display(it.numbering)
-      #it.body
-    ]
-  }
+  // show figure.caption.where(kind: table): it => {
+  //   sidenote(
+  //     dy: 2.0em,
+  //     side: right,
+  //     numbering: none,
+  //     padding: (
+  //       left: 2.0em,
+  //       right: 5.0em
+  //     )
+  //   )[
+  //     #it.supplement
+  //     #context it.counter.display(it.numbering)
+  //     #it.body
+  //   ]
+  // }
 
   doc
 }

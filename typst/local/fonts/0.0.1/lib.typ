@@ -14,7 +14,7 @@
     font: "Palatino Linotype",
     fill: color.off.black,
     number-type: "old-style",
-    // number-width: "proportional",
+    number-width: "proportional",
   ),
   mono: (
     font: "TX-02",
@@ -42,6 +42,7 @@
 #let palatino = (
   font: "Palatino Linotype",
   number-type: "old-style",
+  number-width: "proportional",
 )
 #let berkeley-mono = (font: "TX-02")
 #let kjv1611 = (font: "KJV1611")

@@ -68,11 +68,11 @@
   end: ""
 ) = block(above: 1.0em, below: 1.0em, breakable: false)[
   #text(size: sizes.item, fill: inks.dark, style: "normal", weight: "bold")[#degree]
-  #spacedot()
+  #spacedot(size: sizes.item)
   #text(size: sizes.item, fill: inks.medium, style: "normal", weight: "bold")[#subject]
   #{
     if honor != "" {
-      text(size: sizes.item, fill: inks.light, style: "italic", weight: "bold")[#spacedot()#honor]
+      text(size: sizes.item, fill: inks.light, style: "italic", weight: "bold")[#spacedot(size: sizes.item)#honor]
     }
   }
   #h(1.0fr)
@@ -95,17 +95,17 @@
   #text(size: sizes.item, fill: inks.dark, style: "normal", weight: "bold")[#degree]
   #{
     for subject in subjects {
-      text(size: sizes.item, fill: inks.medium, style: "normal", weight: "bold")[#spacedot()#subject]
+      text(size: sizes.item, fill: inks.medium, style: "normal", weight: "bold")[#spacedot(size: sizes.item)#subject]
     }
     if honor != "" {
-      text(size: sizes.item, fill: inks.light, style: "italic", weight: "bold")[#spacedot()#honor]
+      text(size: sizes.item, fill: inks.light, style: "italic", weight: "bold")[#spacedot(size: sizes.item)#honor]
     }
   }
   #h(1.0fr)
   #text(size: sizes.item, fill: inks.dark, style: "italic", weight: "bold")[#institute]
   #linebreak()
   #{
-    for department in departments.intersperse(spacedot()) {
+    for department in departments.intersperse(spacedot(size: sizes.body)) {
       text(size: sizes.body, fill: inks.medium, style: "normal", weight: "regular")[#sc(department)]
     }
   }
@@ -151,7 +151,7 @@
     [~],
     {
       let index = 0
-      for author in authors.intersperse(spacedot()) {
+      for author in authors.intersperse(spacedot(size: sizes.body)) {
         if index/2 == me {
           text(size: sizes.body, fill: inks.medium, style: "italic", weight: "regular")[#author]
         } else {
@@ -206,7 +206,7 @@
   #{
     if advisors.len() != 0 {
       for advisor in advisors {
-        text(size: sizes.body, fill: inks.light, style: "italic", weight: "regular")[#spacedot()#advisor]
+        text(size: sizes.body, fill: inks.light, style: "italic", weight: "regular")[#spacedot(size: sizes.body)#advisor]
       }
     }
   }
@@ -261,13 +261,13 @@
   semester: ""
 ) = block(above: 1.0em, below: 1.0em, breakable: false)[
   #text(size: sizes.item, fill: inks.dark,   style: "normal", weight: "bold")[#class]
-  #spacedot()
+  #spacedot(size: sizes.item)
   #text(size: sizes.item, fill: inks.medium, style: "normal", weight: "regular")[#sc(course)]
   #h(1.0fr)
   #text(size: sizes.item, fill: inks.dark,   style: "italic", weight: "bold")[#institute]
   #linebreak()
   #text(size: sizes.body, fill: inks.medium, style: "normal", weight: "regular")[#sc(title)]
-  #spacedot()
+  #spacedot(size: sizes.body)
   #text(size: sizes.body, fill: inks.light,  style: "normal", weight: "regular")[
     #{
       if enrollment == "" or enrollment == 0 {
@@ -293,7 +293,7 @@
     columns: (10.0em, auto, auto, auto),
     text(size: sizes.body, fill: inks.dark, style: "normal", weight: "regular")[#sc(type)],
     text(size: sizes.body, fill: inks.medium, style: "italic", weight: "regular")[#institute],
-    spacedot(),
+    spacedot(size: sizes.body),
     text(size: sizes.body, fill: inks.dark,   style: "italic", weight: "bold")[#department],
   )
 ]
@@ -329,7 +329,7 @@
     footer: context text(size: sizes.footnote, fill: inks. light)[#sc[
       #date.display("[month repr:long] [day], [year repr:full]")
       #h(1.0fr)
-      #firstname #lastname#spacedot()curriculum vitae
+      #firstname #lastname#spacedot(size: sizes.footnote)curriculum vitae
       #h(1.0fr)
       #counter(page).display("1 of 1", both: true)
     ]]
@@ -431,10 +431,10 @@
     #text(fill: inks.medium, size: sizes.title)[#firstname] ~
     #text(fill: inks.dark, size: sizes.title, style: "italic", weight: "bold")[#lastname]
 
-    #text(fill: teal,       size: sizes.subtitle, style: "italic", weight: "bold")[#link(url)[#website]]
+    #text(fill: teal, size: sizes.subtitle, style: "italic", weight: "bold")[#link(url)[#website]]
     #spacedot(size: sizes.subtitle)
     // #text(fill: inks.light, size: sizes.subtitle)[$quad dot.c quad$]
-    #text(fill: teal,       size: sizes.subtitle, style: "italic", weight: "bold")[#email]
+    #text(fill: teal, size: sizes.subtitle, style: "italic", weight: "bold")[#email]
   ]
 
   doc

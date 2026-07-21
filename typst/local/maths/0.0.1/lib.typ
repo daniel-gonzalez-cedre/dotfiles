@@ -228,6 +228,9 @@
 #let counter-exercise = counter("exercise")
 #let counter-algorithm = counter("algorithm")
 
+#let _offset = state("_offset", 0)
+#let offset_theorems(value) = _offset.update(value)
+
 #let fragment(
   content,
   title: "Fragment",
@@ -301,6 +304,8 @@
   content,
   numbering: true,
   section: true,
+  level: 1,
+  offset: auto,
   title: "Definition",
   name: "",
   punctuation: ".",
@@ -309,8 +314,9 @@
   if numbering { counter-definition.step() }
   name = if name != "" { ": " + name }
   context {
+    let offset = if offset == auto { _offset.get() } else { offset }
     let number = if numbering and section {
-      " " + counter(heading).get().map(str).at(0) + "." + counter-definition.display()
+      " " + counter(heading.where(level: level)).get().map(x => str(x + offset)).join() + "." + counter-definition.display()
     } else if numbering {
       " " + counter-definition.display()
     } else {
@@ -330,6 +336,8 @@
   numbering: true,
   number: none,
   section: false,
+  level: 1,
+  offset: auto,
   title: "Axiom",
   name: "",
   punctuation: ".",
@@ -346,8 +354,9 @@
   // if numbering { counter-axiom.step() }
   name = if name != "" { ": " + name }
   context {
+    let offset = if offset == auto { _offset.get() } else { offset }
     let num = if numbering and section {
-      " " + counter(heading).get().map(str).at(0) + "." + counter-axiom.display()
+      " " + counter(heading.where(level: level)).get().map(x => str(x + offset)).at(0) + "." + counter-axiom.display()
     } else if number != none {
       " " + str(number)
     } else if numbering {
@@ -368,6 +377,8 @@
   content,
   numbering: true,
   section: true,
+  level: 1,
+  offset: auto,
   title: "Theorem",
   name: "",
   punctuation: ".",
@@ -376,8 +387,9 @@
   if numbering { counter-theorem.step() }
   name = if name != "" { ": " + name }
   context {
+    let offset = if offset == auto { _offset.get() } else { offset }
     let number = if numbering and section {
-      " " + counter(heading).get().map(str).at(0) + "." + counter-theorem.display()
+      " " + counter(heading.where(level: level)).get().map(x => str(x + offset)).at(0) + "." + counter-theorem.display()
     } else if numbering {
       " " + counter-theorem.display()
     } else {
@@ -396,6 +408,8 @@
   content,
   numbering: true,
   section: true,
+  level: 1,
+  offset: auto,
   title: "Lemma",
   name: "",
   punctuation: ".",
@@ -404,8 +418,9 @@
   if numbering { counter-lemma.step() }
   name = if name != "" { ": " + name }
   context {
+    let offset = if offset == auto { _offset.get() } else { offset }
     let number = if numbering and section {
-      " " + counter(heading).get().map(str).at(0) + "." + counter-lemma.display()
+      " " + counter(heading.where(level: level)).get().map(x => str(x + offset)).at(0) + "." + counter-lemma.display()
     } else if numbering {
       " " + counter-lemma.display()
     } else {
@@ -424,6 +439,8 @@
   content,
   numbering: true,
   section: true,
+  level: 1,
+  offset: auto,
   title: "Corollary",
   name: "",
   punctuation: ".",
@@ -432,8 +449,9 @@
   if numbering { counter-corollary.step() }
   name = if name != "" { ": " + name }
   context {
+    let offset = if offset == auto { _offset.get() } else { offset }
     let number = if numbering and section {
-      " " + counter(heading).get().map(str).at(0) + "." + counter-corollary.display()
+      " " + counter(heading.where(level: level)).get().map(x => str(x + offset)).at(0) + "." + counter-corollary.display()
     } else if numbering {
       " " + counter-corollary.display()
     } else {
@@ -452,6 +470,8 @@
   content,
   numbering: true,
   section: true,
+  level: 1,
+  offset: auto,
   title: "Exercise",
   name: "",
   punctuation: ".",
@@ -460,8 +480,9 @@
   if numbering { counter-exercise.step() }
   name = if name != "" { ": " + name }
   context {
+    let offset = if offset == auto { _offset.get() } else { offset }
     let number = if numbering and section {
-      " " + counter(heading).get().map(str).at(0) + "." + counter-exercise.display()
+      " " + counter(heading.where(level: level)).get().map(x => str(x + offset)).at(0) + "." + counter-exercise.display()
     } else if numbering {
       " " + counter-exercise.display()
     } else {
@@ -489,6 +510,8 @@
   content,
   numbering: true,
   section: true,
+  level: 1,
+  offset: auto,
   title: "Algorithm",
   name: "",
   punctuation: ".",
@@ -497,8 +520,9 @@
   if numbering { counter-algorithm.step() }
   name = if name != "" { ": " + name }
   context {
+    let offset = if offset == auto { _offset.get() } else { offset }
     let number = if numbering and section {
-      " " + counter(heading).get().map(str).at(0) + "." + counter-algorithm.display()
+      " " + counter(heading.where(level: level)).get().map(x => str(x + offset)).at(0) + "." + counter-algorithm.display()
     } else if numbering {
       " " + counter-algorithm.display()
     } else {
