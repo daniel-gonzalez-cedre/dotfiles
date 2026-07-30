@@ -21,10 +21,12 @@ function! s:gruvbox_material_colors()
   let l:palette = gruvbox_material#get_palette('medium', 'material', {'bg1': ['#2f2c29', '235']})
   " let l:palette = gruvbox_material#get_palette('medium', 'material', {})
 
-  call gruvbox_material#highlight('IncSearch', l:palette.none, l:palette.none, 'inverse')
-  " call gruvbox_material#highlight('IncSearch', l:palette.bg_yellow, l:palette.none, 'inverse')
+  " call gruvbox_material#highlight('FSearch', l:palette.orange, l:palette.bg5)
+  call gruvbox_material#highlight('IncSearch', l:palette.bg0, l:palette.red)
+  " call gruvbox_material#highlight('IncSearch', l:palette.none, l:palette.none, 'reverse')
+  " call gruvbox_material#highlight('IncSearch', l:palette.bg_yellow, l:palette.none, 'reverse')
   " call gruvbox_material#highlight('Search', l:palette.none, l:palette.bg2)
-  call gruvbox_material#highlight('Search', l:palette.none, l:palette.bg3)
+  call gruvbox_material#highlight('Search', l:palette.bg0, l:palette.yellow)
 
   call gruvbox_material#highlight('Comment', l:palette.bg5, l:palette.none, 'italic')
 
@@ -69,7 +71,8 @@ function! s:gruvbox_material_colors()
   " call gruvbox_material#highlight('StatusLineNC', l:palette.bg2, l:palette.none)
 
 
-  call gruvbox_material#highlight('MatchParen', l:palette.none, l:palette.none, 'reverse')
+  call gruvbox_material#highlight('MatchParen', l:palette.none, l:palette.none, 'bold')
+  " call gruvbox_material#highlight('MatchParen', l:palette.none, l:palette.none, 'reverse')
   " call gruvbox_material#highlight('MatchParen', l:palette.none, l:palette.bg2, 'bold')
   " call gruvbox_material#highlight('MatchParen', l:palette.none, l:palette.bg1, 'bold')
 

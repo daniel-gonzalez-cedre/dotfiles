@@ -1,0 +1,5 @@
+[package]
+name = "cetzp"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["Daniel Gonzalez Cedre"]

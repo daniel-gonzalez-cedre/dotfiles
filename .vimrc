@@ -18,11 +18,13 @@ source ~/.vim/vimrc/pack.vimrc
 
 source ~/.vim/vimrc/pack/capslock.vimrc
 
-source ~/.vim/vimrc/pack/delimitmate.vimrc
+" source ~/.vim/vimrc/pack/delimitmate.vimrc
 source ~/.vim/vimrc/pack/commentary.vimrc
+source ~/.vim/vimrc/pack/lexima.vimrc  " POSSIBLE ALTERNATIVE TO DelimitMate
 source ~/.vim/vimrc/pack/matchit.vimrc
 source ~/.vim/vimrc/pack/surround.vimrc
 
+" source ~/.vim/vimrc/pack/clever-f.vimrc
 source ~/.vim/vimrc/pack/fanfingtastic.vimrc
 source ~/.vim/vimrc/pack/highlightedyank.vimrc
 source ~/.vim/vimrc/pack/rainbow.vimrc

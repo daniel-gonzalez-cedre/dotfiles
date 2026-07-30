@@ -1,1 +1,1 @@
-autocmd! Filetype typst set spell
+" autocmd! Filetype typst set spell

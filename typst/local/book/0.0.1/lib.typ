@@ -7,7 +7,8 @@
 
 // #import "@local/margins:0.0.1": *
 
-#import "@preview/marginalia:0.3.1" as marginalia: note, notefigure, wideblock
+// #import "@preview/marginalia:0.3.1" as marginalia: note, notefigure, wideblock
+#import "@local/marginalia:0.0.1" as marginalia: marginalis, marginale, apostille
 
 #let red    = color.blind.red
 #let green  = color.blind.green
@@ -161,6 +162,12 @@
   quote(attribution: attribution, block: true, content)
 }
 
+#let preheading = heading.with(
+  level: 1,
+  numbering: none,
+  outlined: false
+)
+
 #let book(
   title: [The Title],
   shorttitle: none,
@@ -176,27 +183,12 @@
   backmatter: true,
   paper: "us-letter",  // 215.9mm x 279.4mm
   paper_color: "natural",
+  font_size: 10.0pt,
   header: none,
   footer: none,
   chapter_zero: false,
   doc
 ) = {
-  // show: marginalia.show-frame
-  show: marginalia.setup.with(
-    inner: (
-      far: 7.5mm,  // 5.0mm
-      width: 15.0mm - 5.0mm,  // 15.0mm
-      sep: 7.5mm,  // 5.0mm
-    ),
-    outer: (
-      far: 7.5mm,  // 5.0mm
-      width: 50.0mm,  // 15.0mm
-      sep: 7.5mm,  // 5.0mm
-    ),
-    book: false,
-    clearance: 10.0pt,  // 12.0pt
-  )
-
   show: maths  // @local/maths
 
   if chapter_zero { offset_theorems(-1) }
@@ -218,7 +210,7 @@
 
   set par(justify: true)
 
-  set text( ..fonts.serif, 10.0pt )
+  set text( ..fonts.serif, font_size )
   show raw: set text( ..fonts.mono, size: 1.0em )
 
   set smallcaps(all: true)
@@ -233,23 +225,21 @@
 
   show quote.where(block: false): set text( ..fonts.serif, style: "italic" )
 
-  set enum(indent: 1.0em, body-indent: 1.0em)
-  show enum: set par(justify: false)
+  // set enum(indent: 1.0em, body-indent: 1.0em)
+  show enum: set par(justify: true)
 
-  set list(indent: 1.0em, body-indent: 1.0em)
-  show list: set par(justify: false)
-
-  show: tables  // @local/tables
-
-  // show figure: set figure.caption(separator: [.#h(0.5em)])
-  show figure.caption: set align(left)
-  // show figure.caption: set text( ..fonts.serif, size: 9.0pt )
+  // set list(indent: 1.0em, body-indent: 1.0em)
+  show list: set par(justify: true)
 
   show figure.where(kind: image): set figure(supplement: [Figure], numbering: "1.")
-  show figure.where(kind: image): set figure.caption(position: bottom, separator: [ ])
+  show figure.where(kind: image): set figure.caption(separator: [ ])
+
+  show: tables  // @local/tables
+  show figure.where(kind: table): set figure(supplement: [Table], numbering: "1.")
+  show figure.where(kind: table): set figure.caption(separator: [ ])
 
   show figure.where(kind: raw): set figure(supplement: [Algorithm], numbering: "1.")
-  show figure.where(kind: raw): set figure.caption(position: bottom, separator: [ ])
+  show figure.where(kind: raw): set figure.caption(separator: [ ])
 
   if frontmatter {
     cover_authorblock(author, fonts.sans)
@@ -305,6 +295,12 @@
     outline(depth: 3, indent: 0.0pt)
   }
 
+  show: marginalia.show-frame
+  show: marginalia.setup.with(
+    paper_size: "us-letter",
+    font_size: 10.0pt,
+  )
+
   counter(page).update(0)
   // set page(
   //   // margin: (right: page-margin-right, rest: auto),
@@ -329,7 +325,8 @@
 
   set heading(
     numbering: (..nums) => (
-      nums.pos().slice(0, 1).map(x => x - (if chapter_zero {1} else {0})) + nums.pos().slice(1,)
+      nums.pos().slice(0, 1).map(x => x - (if chapter_zero {1} else {0}))
+      + nums.pos().slice(1,)
     ).map(str).join(".")
   )
 
@@ -342,13 +339,20 @@
     counter-corollary.update(0)
     counter-exercise.update(0)
     counter-algorithm.update(0)
-    block(
-      below: 28.0pt,
-      v(78.0pt)
-      + counter(heading).display()
-      + v(1.2em, weak: true)
-      + it.body
-    )
+    if it.numbering != none {
+      block(
+        below: 28.0pt,
+        v(78.0pt)
+        + counter(heading).display()
+        + v(1.2em, weak: true)
+        + it.body
+      )
+    } else {
+      block(
+        v(32.0pt + 48.0pt)
+        + it.body
+      )
+    }
   }
   show heading.where(level: 2): it => {
     set text( ..fonts.serif, size: 13.0pt, style: "italic", weight: "bold" )
