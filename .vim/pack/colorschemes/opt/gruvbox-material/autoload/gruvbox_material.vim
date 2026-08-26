@@ -7,6 +7,12 @@
 " =============================================================================
 
 function! gruvbox_material#get_configuration() "{{{
+  let float_style = get(g:, 'gruvbox_material_float_style', 'bright')
+  if float_style ==# 'none'
+    let float_style = 'blend'
+    echoerr "g:gruvbox_material_float_style='none' was renamed to 'blend'"
+  endif
+
   return {
         \ 'background': get(g:, 'gruvbox_material_background', 'medium'),
         \ 'foreground': get(g:, 'gruvbox_material_foreground', get(g:, 'gruvbox_material_palette', 'material')),
@@ -15,14 +21,14 @@ function! gruvbox_material#get_configuration() "{{{
         \ 'disable_italic_comment': get(g:, 'gruvbox_material_disable_italic_comment', 0),
         \ 'enable_bold': get(g:, 'gruvbox_material_enable_bold', 0),
         \ 'enable_italic': get(g:, 'gruvbox_material_enable_italic', 0),
-        \ 'cursor': get(g:, 'gruvbox_material_cursor', 'auto'),
+        \ 'cursor': get(g:, 'gruvbox_material_cursor', ''),
         \ 'visual': get(g:, 'gruvbox_material_visual', 'grey background'),
         \ 'menu_selection_background': get(g:, 'gruvbox_material_menu_selection_background', 'grey'),
         \ 'sign_column_background': get(g:, 'gruvbox_material_sign_column_background', 'none'),
         \ 'spell_foreground': get(g:, 'gruvbox_material_spell_foreground', 'none'),
         \ 'ui_contrast': get(g:, 'gruvbox_material_ui_contrast', 'low'),
         \ 'show_eob': get(g:, 'gruvbox_material_show_eob', 1),
-        \ 'float_style': get(g:, 'gruvbox_material_float_style', 'bright'),
+        \ 'float_style': float_style,
         \ 'current_word': get(g:, 'gruvbox_material_current_word', get(g:, 'gruvbox_material_transparent_background', 0) == 0 ? 'grey background' : 'bold'),
         \ 'inlay_hints_background': get(g:, 'gruvbox_material_inlay_hints_background', 'none'),
         \ 'statusline_style': get(g:, 'gruvbox_material_statusline_style', 'default'),
@@ -46,17 +52,17 @@ function! gruvbox_material#get_palette(background, foreground, colors_override) 
             \ 'bg3':              ['#3c3836',   '237'],
             \ 'bg4':              ['#3c3836',   '237'],
             \ 'bg5':              ['#504945',   '239'],
-            \ 'bg_statusline0':   ['#1d2021',   '234'],
             \ 'bg_statusline1':   ['#282828',   '235'],
             \ 'bg_statusline2':   ['#32302f',   '235'],
             \ 'bg_statusline3':   ['#504945',   '239'],
-            \ 'bg_diff_green':    ['#32361a',   '22'],
-            \ 'bg_visual_green':  ['#333e34',   '22'],
-            \ 'bg_diff_red':      ['#3c1f1e',   '52'],
             \ 'bg_visual_red':    ['#442e2d',   '52'],
-            \ 'bg_diff_blue':     ['#0d3138',   '17'],
-            \ 'bg_visual_blue':   ['#2e3b3b',   '17'],
             \ 'bg_visual_yellow': ['#473c29',   '94'],
+            \ 'bg_visual_green':  ['#333e34',   '22'],
+            \ 'bg_visual_blue':   ['#2e3b3b',   '17'],
+            \ 'bg_visual_purple': ['#3c333b',   '54'],
+            \ 'bg_diff_red':      ['#3c1f1e',   '52'],
+            \ 'bg_diff_green':    ['#32361a',   '22'],
+            \ 'bg_diff_blue':     ['#0d3138',   '17'],
             \ 'bg_current_word':  ['#32302f',   '236']
             \ }
     else
@@ -68,17 +74,17 @@ function! gruvbox_material#get_palette(background, foreground, colors_override) 
             \ 'bg3':              ['#f2e5bc',   '228'],
             \ 'bg4':              ['#eee0b7',   '223'],
             \ 'bg5':              ['#ebdbb2',   '223'],
-            \ 'bg_statusline0':   ['#f9f5d7',   '223'],
             \ 'bg_statusline1':   ['#f5edca',   '223'],
             \ 'bg_statusline2':   ['#f3eac7',   '223'],
             \ 'bg_statusline3':   ['#eee0b7',   '250'],
-            \ 'bg_diff_green':    ['#e4edc8',   '194'],
-            \ 'bg_visual_green':  ['#dde5c2',   '194'],
-            \ 'bg_diff_red':      ['#f8e4c9',   '217'],
             \ 'bg_visual_red':    ['#f0ddc3',   '217'],
-            \ 'bg_diff_blue':     ['#e0e9d3',   '117'],
-            \ 'bg_visual_blue':   ['#d9e1cc',   '117'],
             \ 'bg_visual_yellow': ['#f9eabf',   '226'],
+            \ 'bg_visual_green':  ['#dde5c2',   '194'],
+            \ 'bg_visual_blue':   ['#d9e1cc',   '117'],
+            \ 'bg_visual_purple': ['#eee2d1',   '189'],
+            \ 'bg_diff_red':      ['#f8e4c9',   '217'],
+            \ 'bg_diff_green':    ['#e4edc8',   '194'],
+            \ 'bg_diff_blue':     ['#e0e9d3',   '117'],
             \ 'bg_current_word':  ['#f3eac7',   '229']
             \ }
     endif "}}}
@@ -86,23 +92,23 @@ function! gruvbox_material#get_palette(background, foreground, colors_override) 
     if &background ==# 'dark'
       let palette1 = {
             \ 'bg_dim':           ['#1b1b1b',   '233'],
-            \ 'bg0':              ['#282828',   '234'],
-            \ 'bg1':              ['#2f2c29',   '235'],
+            \ 'bg0':              ['#282828',   '235'],
+            \ 'bg1':              ['#32302f',   '236'],
             \ 'bg2':              ['#32302f',   '236'],
             \ 'bg3':              ['#45403d',   '237'],
             \ 'bg4':              ['#45403d',   '237'],
             \ 'bg5':              ['#5a524c',   '239'],
-            \ 'bg_statusline0':   ['#282828',   '234'],
             \ 'bg_statusline1':   ['#32302f',   '236'],
             \ 'bg_statusline2':   ['#3a3735',   '236'],
             \ 'bg_statusline3':   ['#504945',   '240'],
-            \ 'bg_diff_green':    ['#34381b',   '22'],
-            \ 'bg_visual_green':  ['#3b4439',   '22'],
-            \ 'bg_diff_red':      ['#402120',   '52'],
             \ 'bg_visual_red':    ['#4c3432',   '52'],
-            \ 'bg_diff_blue':     ['#0e363e',   '17'],
-            \ 'bg_visual_blue':   ['#374141',   '17'],
             \ 'bg_visual_yellow': ['#4f422e',   '94'],
+            \ 'bg_visual_green':  ['#3b4439',   '22'],
+            \ 'bg_visual_blue':   ['#374141',   '17'],
+            \ 'bg_visual_purple': ['#443840',   '54'],
+            \ 'bg_diff_red':      ['#402120',   '52'],
+            \ 'bg_diff_green':    ['#34381b',   '22'],
+            \ 'bg_diff_blue':     ['#0e363e',   '17'],
             \ 'bg_current_word':  ['#3c3836',   '237']
             \ }
     else
@@ -114,17 +120,17 @@ function! gruvbox_material#get_palette(background, foreground, colors_override) 
             \ 'bg3':              ['#eee0b7',   '223'],
             \ 'bg4':              ['#e5d5ad',   '223'],
             \ 'bg5':              ['#ddccab',   '250'],
-            \ 'bg_statusline0':   ['#fbf1c7',   '223'],
             \ 'bg_statusline1':   ['#f2e5bc',   '223'],
             \ 'bg_statusline2':   ['#f2e5bc',   '223'],
             \ 'bg_statusline3':   ['#e5d5ad',   '250'],
-            \ 'bg_diff_green':    ['#e6eabc',   '194'],
-            \ 'bg_visual_green':  ['#dee2b6',   '194'],
-            \ 'bg_diff_red':      ['#f9e0bb',   '217'],
             \ 'bg_visual_red':    ['#f1d9b5',   '217'],
-            \ 'bg_diff_blue':     ['#e2e6c7',   '117'],
-            \ 'bg_visual_blue':   ['#dadec0',   '117'],
             \ 'bg_visual_yellow': ['#fae7b3',   '226'],
+            \ 'bg_visual_green':  ['#dee2b6',   '194'],
+            \ 'bg_visual_blue':   ['#dadec0',   '117'],
+            \ 'bg_visual_purple': ['#efdec3',   '189'],
+            \ 'bg_diff_red':      ['#f9e0bb',   '217'],
+            \ 'bg_diff_green':    ['#e6eabc',   '194'],
+            \ 'bg_diff_blue':     ['#e2e6c7',   '117'],
             \ 'bg_current_word':  ['#f2e5bc',   '228']
             \ }
     endif "}}}
@@ -138,17 +144,17 @@ function! gruvbox_material#get_palette(background, foreground, colors_override) 
             \ 'bg3':              ['#504945',   '239'],
             \ 'bg4':              ['#504945',   '239'],
             \ 'bg5':              ['#665c54',   '241'],
-            \ 'bg_statusline0':   ['#32302f',   '237'],
             \ 'bg_statusline1':   ['#3c3836',   '237'],
             \ 'bg_statusline2':   ['#46413e',   '237'],
             \ 'bg_statusline3':   ['#5b534d',   '241'],
-            \ 'bg_diff_green':    ['#3d4220',   '22'],
-            \ 'bg_visual_green':  ['#424a3e',   '22'],
-            \ 'bg_diff_red':      ['#472322',   '52'],
             \ 'bg_visual_red':    ['#543937',   '52'],
-            \ 'bg_diff_blue':     ['#0f3a42',   '17'],
-            \ 'bg_visual_blue':   ['#404946',   '17'],
             \ 'bg_visual_yellow': ['#574833',   '94'],
+            \ 'bg_visual_green':  ['#424a3e',   '22'],
+            \ 'bg_visual_blue':   ['#404946',   '17'],
+            \ 'bg_visual_purple': ['#4b3e45',   '54'],
+            \ 'bg_diff_red':      ['#472322',   '52'],
+            \ 'bg_diff_green':    ['#3d4220',   '22'],
+            \ 'bg_diff_blue':     ['#0f3a42',   '17'],
             \ 'bg_current_word':  ['#45403d',   '238']
             \ }
     else
@@ -163,13 +169,14 @@ function! gruvbox_material#get_palette(background, foreground, colors_override) 
             \ 'bg_statusline1':   ['#ebdbb2',   '223'],
             \ 'bg_statusline2':   ['#ebdbb2',   '223'],
             \ 'bg_statusline3':   ['#dac9a5',   '250'],
-            \ 'bg_diff_green':    ['#dfe1b4',   '194'],
-            \ 'bg_visual_green':  ['#d7d9ae',   '194'],
-            \ 'bg_diff_red':      ['#f7d9b9',   '217'],
             \ 'bg_visual_red':    ['#efd2b3',   '217'],
-            \ 'bg_diff_blue':     ['#dbddbf',   '117'],
-            \ 'bg_visual_blue':   ['#d3d5b8',   '117'],
             \ 'bg_visual_yellow': ['#f3deaa',   '226'],
+            \ 'bg_visual_green':  ['#d7d9ae',   '194'],
+            \ 'bg_visual_blue':   ['#d3d5b8',   '117'],
+            \ 'bg_visual_purple': ['#e8d4ba',   '189'],
+            \ 'bg_diff_red':      ['#f7d9b9',   '217'],
+            \ 'bg_diff_green':    ['#dfe1b4',   '194'],
+            \ 'bg_diff_blue':     ['#dbddbf',   '117'],
             \ 'bg_current_word':  ['#ebdbb2',   '227']
             \ }
     endif
@@ -324,7 +331,7 @@ function! gruvbox_material#syn_gen(path, last_modified, msg) "{{{
     call gruvbox_material#ftplugin_detect(a:path)
   else
     echohl WarningMsg | echom '[gruvbox-material] Generated ' . rootpath . syntax_relative_path | echohl None
-    execute 'set runtimepath+=' . fnamemodify(rootpath, ':p') . 'after'
+    execute 'set runtimepath+=' . fnameescape(fnamemodify(rootpath, ':p')) . 'after'
   endif
 endfunction "}}}
 function! gruvbox_material#syn_write(rootpath, syn, content) "{{{
@@ -360,9 +367,10 @@ function! gruvbox_material#syn_write(rootpath, syn, content) "{{{
   call writefile(['" vim: set sw=2 ts=2 sts=2 et tw=80 ft=vim fdm=marker fmr={{{,}}}:'], syn_path, 'a')
 endfunction "}}}
 function! gruvbox_material#syn_rootpath(path) "{{{
+  let plugin_path = fnamemodify(a:path, ':p:h:h')
   " Get the directory where `after/syntax` is generated.
-  if (matchstr(a:path, '^/usr/share') ==# '') " Return the plugin directory. The `after/syntax` directory should never be generated in `/usr/share`, even if you are a root user.
-    return fnamemodify(a:path, ':p:h:h')
+  if (matchstr(a:path, '^/usr/share') ==# '' && filewritable(plugin_path) == 2) " Return the plugin directory. The `after/syntax` directory should never be generated in `/usr/share`, even if you are a root user.
+    return plugin_path
   else " Use vim home directory.
     if has('nvim')
       return stdpath('config')
