@@ -6,11 +6,12 @@
   black:  rgb("#252422"),  // "#141617"
   white:  rgb("#FBF7F1"),
   red:    rgb("#D81B60"),
+  orange: rgb("#FF5430"),
+  yellow: rgb("#FFC107"),
   green:  rgb("#22AC7B"),
   blue:   rgb("#1E88E5"),
-  yellow: rgb("#FFC107"),
   purple: rgb("#7C1D6F"),
-  orange: rgb("#FF5430"),
+  violet: rgb("#7C1D6F"),
   gold:   rgb("#EA9C00"),
 )
 

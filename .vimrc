@@ -9,7 +9,7 @@ source ~/.vim/vimrc/map/toggle.vimrc
 source ~/.vim/vimrc/map/qol.vimrc
 
 source ~/.vim/vimrc/colors/gruvbox.vimrc
-source ~/.vim/vimrc/colors/gruvbox_material.vimrc
+source ~/.vim/vimrc/colors/gruvbox-material.vimrc
 source ~/.vim/vimrc/colors.vimrc
 
 source ~/.vim/vimrc/functions.vimrc
@@ -18,16 +18,16 @@ source ~/.vim/vimrc/pack.vimrc
 
 source ~/.vim/vimrc/pack/capslock.vimrc
 
-" source ~/.vim/vimrc/pack/delimitmate.vimrc
+source ~/.vim/vimrc/pack/delimitmate.vimrc
 source ~/.vim/vimrc/pack/commentary.vimrc
-source ~/.vim/vimrc/pack/lexima.vimrc  " POSSIBLE ALTERNATIVE TO DelimitMate
+" source ~/.vim/vimrc/pack/lexima.vimrc  " POSSIBLE ALTERNATIVE TO DelimitMate
 source ~/.vim/vimrc/pack/matchit.vimrc
 source ~/.vim/vimrc/pack/surround.vimrc
 
 " source ~/.vim/vimrc/pack/clever-f.vimrc
 source ~/.vim/vimrc/pack/fanfingtastic.vimrc
 source ~/.vim/vimrc/pack/highlightedyank.vimrc
-source ~/.vim/vimrc/pack/rainbow.vimrc
+" source ~/.vim/vimrc/pack/rainbow.vimrc
 source ~/.vim/vimrc/pack/lightline.vimrc
 source ~/.vim/vimrc/pack/tmuxline.vimrc
 

@@ -1,127 +1,53 @@
-#import "@local/colors:0.0.1": *
-#import "@local/fonts:0.0.1": *
-#import "@local/maths:0.0.1": *
-#import "@local/defs:0.0.1": *
+// #import "@local/colors:0.0.1": *
+// #import "@local/fonts:0.0.1": *
 
 #import "@local/tables:0.0.1": *
+
+#import "@local/maths:0.1.0" as maths
+#import maths.definitions: *
+#import maths.environments: *
+#import maths.theorems: *
+#import maths.proofs: *
+
+#import "src/formatting.typ": sc, ca, BC, AD
+#import "src/formatting.typ": llap
+
+#import "src/colors.typ" as colors
+
+#import "src/fonts.typ" as fonts
+
+// #import "matter/cover.typ" as cover
+#import "matter.typ" as matter
 
 // #import "@local/margins:0.0.1": *
 
 // #import "@preview/marginalia:0.3.1" as marginalia: note, notefigure, wideblock
 #import "@local/marginalia:0.0.1" as marginalia: marginalis, marginale, apostille
 
-#let red    = color.blind.red
-#let green  = color.blind.green
-#let blue   = color.blind.blue
-#let yellow = color.blind.yellow
-#let purple = color.blind.purple
-#let orange = color.blind.orange
+#let red    = colors.blind.red
+#let orange = colors.blind.orange
+#let yellow = colors.blind.yellow
+#let green  = colors.blind.green
+#let blue   = colors.blind.blue
+#let violet = colors.blind.violet
 
 #let hyperlink( ..args ) = text(
-  ..fonts.serif,
+  ..fonts.select("Palatino Linotype"),
   style: "italic",
   fill: green,
   link( ..args )
 )
 
 #let url( ..args ) = text(
-  ..fonts.mono,
+  ..fonts.select("TX-02"),
   fill: green,
   size: (9 / 10) * 1.0em,
   link( ..args )
 )
 
-#let cover_authorblock(author, font) = {
-  place(top + left, {
-    set text( ..font, size: 20.0pt )
-    align(left, upper(author))
-  })
-}
-
-#let cover_titleblock(title, font) = {
-  place(horizon + left, {
-    set text( ..font, size: 48.0pt, hyphenate: false )
-    v(1.0fr)
-    for word in title.split() {
-      [#upper(word)]
-      v(- 32.0pt)
-    }
-    v(2.0fr)
-  })
-}
-
-#let cover_dateblock(publisher, font, date: datetime.today()) = {
-  place(bottom + center, {
-    set text( ..font, size: 14.0pt )
-    if publisher != none {
-      [#upper(publisher) #h(1.0fr) #upper(displaydate(date))]
-    } else {
-      [#h(1.0fr) #upper(displaydate(date))]
-    }
-  })
-}
-
-#let cover_copyrightblock(university, course, code, author, date: datetime.today()) = {
-  if university != none and lower(university.split().at(0)) == "university" {
-    university = "the " + university
-  }
-
-  let intent = if university != none and code != none {
-    [These notes are intended for students of #raw(code) at #university. \ ]
-  } else if university != none {
-    [These notes are intended for #university. \ ]
-  } else {
-    ""
-  }
-
-  place(bottom + left, [#{intent}Copyright #sym.copyright #date.display("[year]") #author])
-}
-
-#let table_of_contents() = {
-  show heading.where(level: 1): it => {
-    set text( ..fonts.serif, size: 22.0pt, style: "italic", weight: "bold" )
-    block(
-      v(32.0pt + 48.0pt)
-      + it.body
-    )
-  }
-
-  show outline.entry.where(level: 1): set block(above: 32.0pt, below: 12.0pt)
-  show outline.entry.where(level: 2): set block(above:  8.0pt, below:  8.0pt)
-  show outline.entry.where(level: 3): set block(above:  8.0pt, below:  8.0pt)
-
-  show outline.entry.where(level: 1): set text( ..fonts.serif, size: 16.0pt, style: "italic" )
-  show outline.entry.where(level: 2): set text( ..fonts.serif, size: 11.0pt, style: "italic" )
-  show outline.entry.where(level: 3): set text( ..fonts.serif, size: 11.0pt, style: "italic" )
-
-  show outline.entry.where(level: 1): it => link(
-    it.element.location(),
-    it.indented(
-      box(width: 0.0em, h(- 1.8em) + it.prefix()),
-      [ #h(- 0.75em) #it.body() #h(1.0fr) #text(style: "normal", it.page()) ]
-    ),
-  )
-  show outline.entry.where(level: 2): it => link(
-    it.element.location(),
-    it.indented(
-      box(width: 1.2em, it.prefix()),
-      [ #it.body() #h(1.0fr) #text(style: "normal", it.page()) ]
-    ),
-  )
-  show outline.entry.where(level: 3): it => link(
-    it.element.location(),
-    it.indented(
-      box(width: 1.2em, hide(it.prefix())),
-      [ #it.body() #h(1.0fr) #text(style: "normal", it.page()) ]
-    ),
-  )
-
-  outline(depth: 3, indent: 0.0pt)
-}
-
 #let part(weight: "bold", title) = {
   show heading.where(level: 1): it => {
-    set text( ..fonts.serif, size: 22.0pt, style: "italic", weight: weight )
+    set text( ..fonts.select("Palatino Linotype"), size: 22.0pt, style: "italic", weight: weight )
     block(it.body)
   }
   page(header: none, footer: none)[
@@ -137,8 +63,8 @@
   ]
 }
 
-#let quotation(attribution: none, content) = {
-  show quote: set text( ..fonts.serif, size: 9.0pt, style: "italic" )
+#let epigraph(attribution: none, content) = {
+  show quote: set text( size: 9.0pt, style: "italic" )
   show quote.where(block: true): it => {
     set par(justify: false)
     set align(left)
@@ -161,6 +87,7 @@
   }
   quote(attribution: attribution, block: true, content)
 }
+#let quotation = epigraph
 
 #let preheading = heading.with(
   level: 1,
@@ -177,11 +104,11 @@
   university: none,
   course: none,
   code: none,
-  frontmatter: true,
-  toc: true,
+  show_cover: true,
+  show_toc: true,
+  show_back: true,
   bib: none,
-  backmatter: true,
-  paper: "us-letter",  // 215.9mm x 279.4mm
+  paper_size: "us-letter",  // 215.9mm x 279.4mm
   paper_color: "natural",
   font_size: 10.0pt,
   header: none,
@@ -189,9 +116,9 @@
   chapter_zero: false,
   doc
 ) = {
-  show: maths  // @local/maths
+  show: maths.setup
 
-  if chapter_zero { offset_theorems(-1) }
+  if chapter_zero { maths.counters.offset.update(-1) }
 
   set document(
     title: title,
@@ -202,16 +129,16 @@
   // let page-margin-right = (3.125in, 3.0in, 2.525in).at(1)  // 3.0 inches
 
   set page(
-    paper: paper,
-    fill: if paper_color == "natural" { color.paper.natural } else { color.paper.bleached },
+    paper: paper_size,
+    fill: if paper_color == "natural" { colors.paper.natural } else { colors.paper.bleached },
     header: none,
     footer: none,
   )
 
   set par(justify: true)
 
-  set text( ..fonts.serif, font_size )
-  show raw: set text( ..fonts.mono, size: 1.0em )
+  set text( ..fonts.select("Palatino Linotype"), fill: fonts.ink, size: font_size )
+  show raw: set text( ..fonts.select("TX-02"), size: 1.0em )
 
   set smallcaps(all: true)
 
@@ -223,7 +150,7 @@
     )
   )
 
-  show quote.where(block: false): set text( ..fonts.serif, style: "italic" )
+  show quote.where(block: false): set text( ..fonts.select("Palatino Linotype"), style: "italic" )
 
   // set enum(indent: 1.0em, body-indent: 1.0em)
   show enum: set par(justify: true)
@@ -241,58 +168,20 @@
   show figure.where(kind: raw): set figure(supplement: [Algorithm], numbering: "1.")
   show figure.where(kind: raw): set figure.caption(separator: [ ])
 
-  if frontmatter {
-    cover_authorblock(author, fonts.sans)
-    cover_titleblock(title, fonts.sans)
-    cover_dateblock(publisher, fonts.sans, date: date)
-
-    pagebreak()
-
-    cover_copyrightblock(university, course, code, author, date: date)
-
-    pagebreak()
+  if show_cover {
+    show: matter.cover.with(
+      title: title,
+      author: author,
+      date: date,
+      publisher: publisher,
+      university: university,
+      course: course,
+      code: code,
+    )
   }
 
-  if toc {
-    show heading.where(level: 1): it => {
-      set text( ..fonts.serif, size: 22.0pt, style: "italic", weight: "bold" )
-      block(
-        v(32.0pt + 48.0pt)
-        + it.body
-      )
-    }
-
-    show outline.entry.where(level: 1): set block(above: 32.0pt, below: 12.0pt)
-    show outline.entry.where(level: 2): set block(above:  8.0pt, below:  8.0pt)
-    show outline.entry.where(level: 3): set block(above:  8.0pt, below:  8.0pt)
-
-    show outline.entry.where(level: 1): set text( ..fonts.serif, size: 16.0pt, style: "italic" )
-    show outline.entry.where(level: 2): set text( ..fonts.serif, size: 11.0pt, style: "italic" )
-    show outline.entry.where(level: 3): set text( ..fonts.serif, size: 11.0pt, style: "italic" )
-
-    show outline.entry.where(level: 1): it => link(
-      it.element.location(),
-      it.indented(
-        box(width: 0.0em, h(- 1.8em) + it.prefix()),
-        [ #h(- 0.75em) #it.body() #h(1.0fr) #text(style: "normal", it.page()) ]
-      ),
-    )
-    show outline.entry.where(level: 2): it => link(
-      it.element.location(),
-      it.indented(
-        box(width: 1.2em, it.prefix()),
-        [ #it.body() #h(1.0fr) #text(style: "normal", it.page()) ]
-      ),
-    )
-    show outline.entry.where(level: 3): it => link(
-      it.element.location(),
-      it.indented(
-        box(width: 1.2em, hide(it.prefix())),
-        [ #it.body() #h(1.0fr) #text(style: "normal", it.page()) ]
-      ),
-    )
-
-    outline(depth: 3, indent: 0.0pt)
+  if show_toc {
+    show: matter.toc
   }
 
   show: marginalia.show-frame
@@ -302,26 +191,6 @@
   )
 
   counter(page).update(0)
-  // set page(
-  //   // margin: (right: page-margin-right, rest: auto),
-  //   margin: (right: page-margin-right, rest: auto),
-  //   header: context {
-  //     if query(selector(heading.where(level: 1))).filter(h => h.location().page() == here().page()).len() == 0 and query(selector(heading.where(level: 1)).before(here())).len() != 0 {
-  //       block(width: 100.0% + (page-margin-right - 1.0125in),
-  //         smallcaps(query(selector(heading.where(level: 1)).before(here())).last().body)
-  //         + h(1.0fr)
-  //         + counter(page).display()
-  //         + v(1.0em)
-  //       )
-  //       // fullwidth(
-  //         // smallcaps(query(selector(heading.where(level: 1)).before(here())).last().body)
-  //         // + h(1.0fr)
-  //         // + counter(page).display()
-  //         // + v(1.0em)
-  //       // )
-  //     }
-  //   }
-  // )
 
   set heading(
     numbering: (..nums) => (
@@ -331,14 +200,14 @@
   )
 
   show heading.where(level: 1): it => {
-    set text( ..fonts.serif, size: 22.0pt, style: "italic", weight: "bold" )
-    counter-definition.update(0)
-    counter-axiom.update(0)
-    counter-theorem.update(0)
-    counter-lemma.update(0)
-    counter-corollary.update(0)
-    counter-exercise.update(0)
-    counter-algorithm.update(0)
+    set text( ..fonts.select("Palatino Linotype"), size: 22.0pt, style: "italic", weight: "bold" )
+    maths.counters.definition.update(0)
+    maths.counters.axiom.update(0)
+    maths.counters.theorem.update(0)
+    maths.counters.lemma.update(0)
+    maths.counters.corollary.update(0)
+    maths.counters.exercise.update(0)
+    maths.counters.algorithm.update(0)
     if it.numbering != none {
       block(
         below: 28.0pt,
@@ -355,7 +224,7 @@
     }
   }
   show heading.where(level: 2): it => {
-    set text( ..fonts.serif, size: 13.0pt, style: "italic", weight: "bold" )
+    set text( ..fonts.select("Palatino Linotype"), size: 13.0pt, style: "italic", weight: "bold" )
     block(
       above: 28.0pt,
       below: 16.0pt,
@@ -363,7 +232,7 @@
     )
   }
   show heading.where(level: 3): it => {
-    set text( ..fonts.serif, size: 12.0pt, style: "italic", weight: "bold" )
+    set text( ..fonts.select("Palatino Linotype"), size: 12.0pt, style: "italic", weight: "bold" )
     block(
       above: 28.0pt,
       below: 16.0pt,
@@ -384,7 +253,7 @@
   doc
 
   if bib != none {
-    show bibliography: set text( ..fonts.serif, size: 9.0pt )
+    show bibliography: set text( ..fonts.select("Palatino Linotype"), size: 9.0pt )
     show bibliography: set par(justify: false)
     set bibliography(title: none)
     heading(level: 1, [Bibliography])
@@ -402,13 +271,12 @@
   university: none,
   course: none,
   code: none,
-  paper: "us-letter",
+  paper_size: "us-letter",
   paper_color: "natural",
   header: none,
   footer: none,
   doc
 ) = {
-  let chapter_zero = ( number == 0 )
   show: book.with(
     title: title,
     shorttitle: none,
@@ -418,19 +286,19 @@
     university: university,
     course: course,
     code: code,
-    frontmatter: false,
-    toc: false,
+    show_cover: false,
+    show_toc: false,
+    show_back: false,
     bib: none,
-    backmatter: false,
-    paper: paper,
+    paper_size: paper_size,
     paper_color: paper_color,
     header: header,
     footer: footer,
-    chapter_zero: chapter_zero,
+    chapter_zero: ( number == 0 ),
   )
   if number != 0 {
     counter(heading).update(number - 1)
-    offset_theorems(number - 1)
+    maths.counters.offset.update(number - 1)
   }
   doc
 }

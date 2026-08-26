@@ -9,4 +9,8 @@
 #let scale = cetz.vector.scale
 #let div = cetz.vector.div
 
-#let direction(u, v) = cetz.vector.norm(cetz.vector.sub(u, v))
+#let direction(u, v) = cetz.vector.norm(cetz.vector.sub(v, u))
+
+// #let resolve(coord) = cetz.draw.get-ctx(ctx => {
+
+// })

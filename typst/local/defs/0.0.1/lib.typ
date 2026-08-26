@@ -3,6 +3,13 @@
 #let BC = smallcaps("bc")
 #let AD = smallcaps("ad")
 
+// #let sc = body => {
+//   show regex("([A-Z,a-z])+"): it => {
+//     smallcaps(lower(it))
+//   }
+//   body
+// }
+
 #let diacritic = (
   grave: (
     single: x => x + "\u{300}",

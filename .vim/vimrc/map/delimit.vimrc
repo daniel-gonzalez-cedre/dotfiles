@@ -1,7 +1,7 @@
 " DELIMITER MAPPINGS
 augroup delimiter_mappings | au!
-  au VimEnter,BufEnter * imap <silent> <c-f>a <
-  au VimEnter,BufEnter * imap <silent> <c-g>a >
+  au VimEnter,BufEnter * imap <silent> <c-f>n <
+  au VimEnter,BufEnter * imap <silent> <c-g>n >
 
   au VimEnter,BufEnter * imap <silent> <c-f>b (
   au VimEnter,BufEnter * imap <silent> <c-g>b )
@@ -18,16 +18,24 @@ augroup delimiter_mappings | au!
   au VimEnter,BufEnter * imap <silent> <c-f>g `
   au VimEnter,BufEnter * imap <silent> <c-g>g `
 
-  au VimEnter,BufEnter * imap <silent> <c-f>h #
-
   au VimEnter,BufEnter * imap <silent> <c-f>t ~
+
+  au VimEnter,BufEnter * imap <silent> <c-f>i !
+
+  au VimEnter,BufEnter * imap <silent> <c-f>o @
+
+  au VimEnter,BufEnter * imap <silent> <c-f>h #
 
   au VimEnter,BufEnter * imap <silent> <c-f>d $
   au VimEnter,BufEnter * imap <silent> <c-g>d $
   au VimEnter,BufEnter * imap <silent> <c-f><c-d> $
   au VimEnter,BufEnter * imap <silent> <c-g><c-d> $
 
+  au VimEnter,BufEnter * imap <silent> <c-f>p %
+
   au VimEnter,BufEnter * imap <silent> <c-f>e ^
+
+  au VimEnter,BufEnter * imap <silent> <c-f>a &
 
   au VimEnter,BufEnter * imap <silent> <c-f>x *
 
@@ -40,11 +48,11 @@ augroup delimiter_mappings | au!
   au FileType bib,tex inoremap <silent> <c-g>Q ""
   au FileType bib,tex inoremap <silent> <c-f><c-q> ``""<left><left>
 
-  au VimEnter,BufEnter * onoremap <silent> aa a<
-  au VimEnter,BufEnter * xnoremap <silent> aa a<
+  au VimEnter,BufEnter * onoremap <silent> an a<
+  au VimEnter,BufEnter * xnoremap <silent> an a<
 
-  au VimEnter,BufEnter * onoremap <silent> ia i<
-  au VimEnter,BufEnter * xnoremap <silent> ia i<
+  au VimEnter,BufEnter * onoremap <silent> in i<
+  au VimEnter,BufEnter * xnoremap <silent> in i<
 
   au VimEnter,BufEnter * onoremap <silent> ac a{
   au VimEnter,BufEnter * xnoremap <silent> ac a{

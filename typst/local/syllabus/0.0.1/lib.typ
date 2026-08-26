@@ -3,7 +3,7 @@
 #import "@local/maths:0.0.1": *
 #import "@local/defs:0.0.1": *
 
-#import "@local/tables:0.0.1": *
+#import "@local/tables:0.0.1" as tables
 
 #import "@local/margins:0.0.1": *
 
@@ -133,7 +133,7 @@
   set list(indent: 1.0em, body-indent: 1.0em)
   show list: set par(justify: false)
 
-  show: tables
+  show: tables.setup
   // show table.header: it => {
   //   set table.cell(fill: red)
   //   it

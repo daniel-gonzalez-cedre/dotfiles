@@ -4,6 +4,8 @@
 #import "colors.typ": inks
 #import "styles.typ": *
 
+#let content = cetz.draw.content
+
 #let point(
   P,
   name: none,
@@ -46,9 +48,10 @@
 #let arc         = cetz.draw.arc
 #let arc-through = cetz.draw.arc-through
 #let arc-between(
-  origin,
   start,
+  origin,
   end,
+  recenter: false,
   ..args
 ) = cetz.draw.get-ctx(ctx => {
   let style = cetz.styles.resolve(
@@ -57,8 +60,28 @@
     base: default-arc-between,
     root: "arc-between"
   )
+
+  let start = if recenter {
+    vector.sub(vector.add(origin, vector.scale(vector.direction(origin, start), style.radius/1.0cm)), origin)
+  } else {
+    vector.add(origin, vector.scale(vector.direction(origin, start), style.radius/1.0cm))
+  }
+
+  let end = if recenter {
+    vector.sub(vector.add(origin, vector.scale(vector.direction(origin, end), style.radius/1.0cm)), origin)
+  } else {
+    vector.add(origin, vector.scale(vector.direction(origin, end), style.radius/1.0cm))
+  }
+
+  let origin = if recenter {
+    vector.sub(origin, origin)
+  } else {
+    origin
+  }
+
   return cetz.angle.angle(
     origin, start, end,
+    direction: style.direction,
     radius: style.radius,
     stroke: (
       thickness: style.thickness,
@@ -69,7 +92,8 @@
     fill: style.fill,
   )
 })
-#let sector = arc-between.with(thickness: 0.0cm)
+#let sector         = arc-between.with(thickness: 0.0cm, recenter: true)
+#let sector-between = arc-between.with(thickness: 0.0cm)
 
 #let circle         = cetz.draw.circle
 #let circle-through = cetz.draw.circle-through
@@ -98,8 +122,8 @@
   let postpad = if pad != auto { pad } else if post != auto { post } else { 0.0 }
 
   return cetz.draw.line(
-    vector.sub(u, vector.scale(vector.direction(u, v), prepad)),
-    vector.add(v, vector.scale(vector.direction(u, v), postpad)),
+    vector.sub(u, vector.scale(vector.direction(u, v), -1.0*prepad)),
+    vector.add(v, vector.scale(vector.direction(u, v), -1.0*postpad)),
     name: name,
     mark: (
       symbol: if (bidirected or directed) { style.mark-symbol } else { none },
@@ -142,12 +166,12 @@
 
   pts.at(0) = vector.sub(
     pts.at(0),
-    vector.scale(vector.direction(pts.at(0), pts.at(1)), prepad)
+    vector.scale(vector.direction(pts.at(0), pts.at(1)), -1.0*prepad)
   )
 
   pts.at(-1) = vector.add(
     pts.at(-1),
-    vector.scale(vector.direction(pts.at(-2), pts.at(-1)), postpad)
+    vector.scale(vector.direction(pts.at(-2), pts.at(-1)), -1.0*postpad)
   )
 
   return cetz.draw.line(
@@ -192,3 +216,5 @@
     ..style,
   )
 })
+
+#let rect = cetz.draw.rect

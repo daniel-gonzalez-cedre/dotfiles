@@ -1,9 +1,4 @@
-#import "@local/colors:0.0.1": *
-#import "@local/fonts:0.0.1": *
-
-// #import "@local/margins:0.0.1": sidenote
-
-#let tables(
+#let setup(
   doc
 ) = {
   set table(align: (x, y) => { if y == 0 { horizon + center } else { horizon + left } })
@@ -18,34 +13,19 @@
     right: none,
     top: if y == 0 {
       stroke(
-        paint: color.off.black,
+        // paint: color.off.black,
         thickness: 0.8pt,
         cap: "round"
       )
     } else { 0.0pt },
     bottom: stroke(
-      paint: color.off.black,
+      // paint: color.off.black,
       thickness: 0.8pt,
       cap: "round"
     )
   ))
 
   show figure.where(kind: table): set figure.caption(position: top, separator: [ ])
-  // show figure.caption.where(kind: table): it => {
-  //   sidenote(
-  //     dy: 2.0em,
-  //     side: right,
-  //     numbering: none,
-  //     padding: (
-  //       left: 2.0em,
-  //       right: 5.0em
-  //     )
-  //   )[
-  //     #it.supplement
-  //     #context it.counter.display(it.numbering)
-  //     #it.body
-  //   ]
-  // }
 
   doc
 }
@@ -57,7 +37,7 @@
     right: none,
     top: if y == 1 { none } else { 0.0pt },
     bottom: stroke(
-      paint: color.off.black,
+      // paint: color.off.black,
       thickness: 0.8pt,
       cap: "round"
     )

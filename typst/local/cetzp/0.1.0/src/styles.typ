@@ -46,10 +46,10 @@
 )
 
 #let default-point = (
-  radius: default-stroke.thickness/2,
+  radius: default-stroke.thickness,
   stroke: (
-    paint: white.transparentize(100.0%),
     thickness: 0.0cm,
+    paint: white.transparentize(100.0%),
   ),
   fill: default-stroke.paint,
   padding: default-content.padding,
@@ -63,7 +63,8 @@
 #let default-arc = (stroke: default-stroke)
 #let default-arc-through = (stroke: default-stroke)
 #let default-arc-between = (
-  radius: 0.2cm,
+  direction: "ccw",
+  radius:    2*default-stroke.thickness,
   thickness: default-stroke.thickness,
   paint:     default-stroke.paint,
   dash:      default-stroke.dash,
