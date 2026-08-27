@@ -1,3 +1,4 @@
+FanfingTasticAlias <c-f>g `
 FanfingTasticAlias <c-f>t ~
 FanfingTasticAlias <c-f>i !
 FanfingTasticAlias <c-f>o @
@@ -7,6 +8,7 @@ FanfingTasticAlias <c-f>p %
 FanfingTasticAlias <c-f>e ^
 FanfingTasticAlias <c-f>a &
 FanfingTasticAlias <c-f>x *
+FanfingTasticAlias <c-f>u _
 FanfingTasticAlias <c-f>b (
 FanfingTasticAlias <c-g>b )
 FanfingTasticAlias <c-f>B {
