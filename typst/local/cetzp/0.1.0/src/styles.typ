@@ -8,7 +8,7 @@
 )
 
 #let default-stroke = (
-  thickness: 0.1cm,
+  thickness: 0.05cm,
   paint: inks.off.black,
   dash: "solid",
   join: "round",

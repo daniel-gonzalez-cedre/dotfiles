@@ -533,13 +533,31 @@ alias hhkb='open -a hhkb-keymap-tool'
 
   _add_latex_completion() {
   local -a cmds
-  cmds=(lualatex luatex xelatex xetex cleanlatex cleantex) # Add other commands here
+  cmds=(lualatex luatex xelatex xetex cleanlatex cleantex) # ADD OTHER COMMANDS HERE
     for cmd in $cmds; do
       compdef _tex_complete $cmd
     done
   }
 
   _add_latex_completion
+}
+
+(){
+  _typ_complete() {
+    local -a files
+    files=(*.typ)
+    _files -g '*.typ'
+  }
+
+  _add_typst_completion() {
+  local -a cmds
+  cmds=(typst) # ADD OTHER COMMANDS HERE
+    for cmd in $cmds; do
+      compdef _typ_complete $cmd
+    done
+  }
+
+  _add_typst_completion
 }
 
 function hex2rgb() {

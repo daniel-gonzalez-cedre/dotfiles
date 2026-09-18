@@ -1,4 +1,0 @@
-[package]
-name = "article"
-version = "0.0.1"
-entrypoint = "lib.typ"
