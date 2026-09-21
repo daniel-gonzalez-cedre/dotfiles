@@ -11,7 +11,7 @@
 #import maths.proofs: *
 // #import maths.fonts: math-text, text-math, fraktur, mono
 
-#import "@local/utilities:0.1.0" as utilities: nth
+#import "@local/utilities:0.1.0" as utilities
 
 #import "impl/src/formatting.typ" as formatting
 #import formatting: ca, cf, Eg, eg, etal, etc, ibid, Ie, ie, NB, nb, qv, qqv, sl, ss, vide, viz, vs, BC, AD
