@@ -1,0 +1,90 @@
+#let to-string(it) = {
+  if type(it) == str {
+    return it
+  } else if type(it) != content {
+    return str(it)
+  } else if it.has("text") {
+    return it.text
+  } else if it.has("children") {
+    return it.children.map(to-string).join()
+  } else if it.has("body") {
+    return to-string(it.body)
+  } else if it == [ ] {
+    " "
+  } else {
+    panic()
+  }
+}
+
+#let circa = [_ca._]
+#let ca = [_ca._]
+#let BC = smallcaps("bc")
+#let AD = smallcaps("ad")
+
+#let sc = body => {
+  show regex("([A-Z,a-z])+"): it => {
+    smallcaps(lower(it))
+  }
+  body
+}
+
+#let diacritic = (
+  grave: (
+    single: x => x + "\u{300}",
+    double: x => x + "\u{30F}"  // NOT SUPPORTED
+  ),
+  acute: (
+    single: x => x + "\u{301}",
+    double: x => x + "\u{30B}"
+  ),
+  dot: (
+    over:   x => x + "\u{307}",
+    double: x => x + "\u{308}",
+    under:  x => x + "\u{323}"
+  ),
+  umlaut:   x => x + "\u{308}",
+  diaresis: x => x + "\u{308}",
+  tilde: x => x + "\u{303}",
+  circumflex: x => x + "\u{302}",
+  caron: x => x + "\u{30C}",  // NOT SUPPORTED
+)
+
+#let llap(body) = {
+  box(width: 0.0pt)[#h(-100cm)#h(1.0fr)#body]
+}
+
+#let nth(num) = {
+  num = int(num)
+  let rem = calc.rem(num, 10)
+  if num not in (11, 12, 13) {
+    if rem == 1 { return str(num) + super[st] }
+    if rem == 2 { return str(num) + super[nd] }
+    if rem == 3 { return str(num) + super[rd] }
+  }
+  return str(num) + super[th]
+}
+
+#let displaydate(date, short: false, long: false, year: true) = {
+  if year {
+    let year = date.display("[year]")
+    let month = date.display("[month repr:long]")
+    let day = date.display("[day padding:none]")
+    if short {
+      return month + " " + day + ", " + year
+    } else if long {
+      return nth(day) + " day of " + month + " of the year of our Lord " + year
+    } else {
+      return nth(day) + " of " + month + ", " + year
+    }
+  } else {
+    let month = date.display("[month repr:long]")
+    let day = date.display("[day padding:none]")
+    if short {
+      return month + " " + day
+    } else if long {
+      return nth(day) + " day of " + month
+    } else {
+      return nth(day) + " of " + month
+    }
+  }
+}
