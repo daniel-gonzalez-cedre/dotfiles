@@ -6,6 +6,14 @@
 #import "src/colors.typ" as colors
 #import "src/fonts.typ" as fonts
 
+#let question = block.with(
+  height: 1fr,
+  // stroke: (bottom: 0.6pt),
+  stroke: 0.6pt,
+  inset: 6pt,
+  sticky: true,
+)
+
 #let option = box(circle(radius: 3.6pt, stroke: colors.fg + 0.6pt, fill: none))
 #let answer = box(circle(radius: 3.6pt, stroke: colors.fg + 0.6pt, fill: colors.fg))
 

@@ -11,6 +11,8 @@
 #import maths.proofs: *
 // #import maths.fonts: math-text, text-math, fraktur, mono
 
+#import "@local/utilities:0.1.0" as utilities: nth
+
 #import "impl/src/formatting.typ" as formatting
 #import formatting: ca, cf, Eg, eg, etal, etc, ibid, Ie, ie, NB, nb, qv, qqv, sl, ss, vide, viz, vs, BC, AD
 #import formatting: define, hyperlink, url
@@ -23,5 +25,5 @@
 #import "impl/chapter.typ": chapter
 #import "impl/article.typ": article
 #import "impl/assignment.typ": problem-set, solution-set
-#import "impl/assessment.typ": exam, quiz, option, answer
+#import "impl/assessment.typ": exam, quiz, question, option, answer
 #import "impl/syllabus.typ": syllabus
