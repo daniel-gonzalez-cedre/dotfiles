@@ -59,6 +59,14 @@
 #let ran(f)      = $op(frak("ran"))(#f)$
 
 #let fib = math.class("normal", $cal("F")$)
+#let fibonacci = math.class("normal", $cal("F")$)
+
+#let ballot = math.class("normal", $cal("B")$)
+#let subcat = math.class("normal", $cal("B")$)
+#let subcatalan = math.class("normal", $cal("B")$)
+
+#let cat = math.class("normal", $cal("C")$)
+#let catalan = math.class("normal", $cal("C")$)
 
 #let id = math.class("normal", formatting.mono("id"))
 

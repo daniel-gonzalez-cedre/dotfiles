@@ -34,6 +34,8 @@
     number-type: "lining",
   )
 
+  show math.equation: set block(breakable: true)
+
   show math.equation.where(block: false): set math.lr(size: 100%)
   show math.equation.where(block: true): set math.lr(size: 100% + 2pt)
   // show math.equation: set text(font: if math-font == auto { "Concrete Math" } else { math-font })

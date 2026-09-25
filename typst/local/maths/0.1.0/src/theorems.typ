@@ -50,16 +50,18 @@
   }
 }
 
-#let idea      = statement.with(title: "Idea",      thecounter: counter("idea"),      section: true)
-#let lemma     = statement.with(title: "Lemma",     thecounter: counter("lemma"),     section: true)
-#let theorem   = statement.with(title: "Theorem",   thecounter: counter("theorem"),   section: true)
-#let corollary = statement.with(title: "Corollary", thecounter: counter("corollary"), section: true)
+#let idea       = statement.with(title: "Idea",       thecounter: counter("idea"),       section: true)
+#let conjecture = statement.with(title: "Conjecture", thecounter: counter("conjecture"), section: true)
+#let lemma      = statement.with(title: "Lemma",      thecounter: counter("lemma"),      section: true)
+#let theorem    = statement.with(title: "Theorem",    thecounter: counter("theorem"),    section: true)
+#let corollary  = statement.with(title: "Corollary",  thecounter: counter("corollary"),  section: true)
 
 #let definition = statement.with(title: "Definition", thecounter: counter("definition"), section: true)
 #let axiom      = statement.with(title: "Axiom",      thecounter: counter("axiom"),      section: false)
 #let rule       = statement.with(title: "Rule",       thecounter: counter("rule"),       section: false)
 
-#let exercise  = statement.with(title: "Exercise",  thecounter: counter("exercise"),  section: true, newline: false)
+#let example   = statement.with(title: "Example",   thecounter: counter("example"),   section: true)
+#let exercise  = statement.with(title: "Exercise",  thecounter: counter("exercise"),  section: true, newline: false, delimiter: "")
 #let algorithm = statement.with(title: "Algorithm", thecounter: counter("algorithm"), section: true)
 
 // #let algorithm(

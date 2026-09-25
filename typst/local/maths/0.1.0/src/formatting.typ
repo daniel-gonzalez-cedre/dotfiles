@@ -43,7 +43,43 @@
   box({
     place(
       bottom + center,
-      dy: level*gap + 1.2em,
+      dy: level*gap + 1.4em,
+      brace(
+        hide(
+          text(top-edge: "ascender", bottom-edge: "descender")[$#body$]
+        ),
+        if fill == auto { math-text[#annotation] } else { math-text(fill: fill)[#annotation] }
+      )
+    )
+    $#body$
+  })
+}
+
+#let over(
+  body,
+  annotation,
+  delimiter: "brace",
+  level: 0,
+  fill: auto,
+  gap: -1.4em,
+) = {
+  let brace = if delimiter == "line" {
+    math.overline
+  } else if delimiter == "brace" {
+    math.overbrace
+  } else if delimiter == "bracket" {
+    math.overbracket
+  } else if delimiter == "paren" {
+    math.overparen
+  } else if delimiter == "shell" {
+    math.overshell
+  } else {
+    panic()
+  }
+  box({
+    place(
+      top + center,
+      dy: -level*gap - 1.2em,
       brace(
         hide(
           text(top-edge: "ascender", bottom-edge: "descender")[$#body$]

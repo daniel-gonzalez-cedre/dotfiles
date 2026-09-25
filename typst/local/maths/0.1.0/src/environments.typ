@@ -74,3 +74,6 @@
 
 #let case-basis(content) = case(content, title: "Basis Step", numbering: false, weight: "regular")
 #let case-inductive(content) = case(content, title: "Inductive Step", numbering: false, weight: "regular")
+
+#let basis-step(content) = case(content, title: "Basis Step", numbering: false, weight: "regular")
+#let inductive-step(content) = case(content, title: "Inductive Step", numbering: false, weight: "regular")
