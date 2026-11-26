@@ -3,17 +3,19 @@
 
 // #let define = text.with(fill: luma(25%), style: "italic", weight: "bold")
 // #let define = text.with(style: "italic", weight: "bold")
-#let define(end: "", style: "italic", weight: "bold", ..args, it) = {
+#let define(end: "", style: "italic", weight: "regular", fill: auto, ..args, it) = {
   if end != "" {
     [#text(style: style, weight: weight, ..args)[#it]#text(style: style)[#end]]
   } else {
     [#text(style: style, weight: weight, ..args)[#it]]
+    // [#text(style: style, weight: weight, fill: colors.light.orange, ..args)[#it]]
   }
 }
 
 #let hyperlink( ..args ) = text(
   style: "italic",
-  fill: colors.blue,
+  // fill: colors.fg.transparentize(15%),
+  // fill: colors.blue,
 )[#link( ..args )]
 
 #let url( ..args ) = text(

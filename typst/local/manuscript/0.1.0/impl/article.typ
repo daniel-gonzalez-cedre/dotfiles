@@ -177,7 +177,9 @@
   //   serif[#num]
   // })
 
-  // show link: set text(style: "italic", weight: "bold", fill: colors.fg.transparentize(25%))
+  // show link: set text(style: "italic", fill: colors.fg.transparentize(15%))
+  // show link: set text(style: "italic", weight: "regular", fill: colors.fg.transparentize(10%))
+  // show ref: set text(style: "italic", weight: "bold", fill: colors.fg.transparentize(25%))
 
   doc
 

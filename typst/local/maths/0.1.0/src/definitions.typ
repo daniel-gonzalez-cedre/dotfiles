@@ -34,34 +34,61 @@
 #let prime(x) = $#x$ + " is prime"
 #let composite(x) = $#x$ + " is composite"
 
+// #let injective(x) = $#x$ + " is injective"
+// #let surjective(x) = $#x$ + " is surjective"
+// #let bijective(x) = $#x$ + " is bijective"
+
+// #let hash()
+// #let hash(x) = math.class("normal", $hash$)
+// #let card = math.class("normal", text(size: 0.8em)[#math.hash])
 #let cardinality(x) = math.abs(x)
-#let card(x) = math.abs(x)
+// #let card(x) = math.abs(x)
 #let norm(x) = math.bar.v.double + x + math.bar.v.double
 // #let suc(n) = $op(frak("s"))(#n)$
 #let suc(n) = $op(frak("suc"))(#n)$
 #let pre(n) = $op(frak("pre"))(#n)$
 #let nat(n) = math.lr(sym.bracket.l.stroked) + n + math.lr(sym.bracket.r.stroked)
 
-#let walk(p) = $#p$ + " is a walk"
-#let path(p) = $#p$ + " is a path"
-#let circuit(p) = $#p$ + " is a circuit"
-#let cycle(p) = $#p$ + " is a cycle"
+// #let walk(p) = $#p$ + " is a walk"
+// #let path(p) = $#p$ + " is a path"
+// #let circuit(p) = $#p$ + " is a circuit"
+// #let cycle(p) = $#p$ + " is a cycle"
 
+#let neighborhood(G, ..v) = {
+  let glyph = if v.pos().len() == 0 {
+    $N_(#G)$
+  } else {
+    $N_(#G)(#v.pos().at(0))$
+  }
+  return math.class("normal", glyph)
+}
+
+// TODO
+// #let id = math.class("normal", formatting.mono("id"))
 #let deg(G, ..v) = {
-  if v.pos().len() == 0 {
+  let glyph = if v.pos().len() == 0 {
     $formatting.mono("deg")_(#G)$
   } else {
     $formatting.mono("deg")_(#G)(#v.pos().at(0))$
   }
+  return math.class("normal", glyph)
 }
 // #let degree(G, v) = $formatting.mono(deg)_(G)(v)$
+#let coboundary(G, ..v) = {
+  let glyph = if v.pos().len() == 0 {
+    $delta_(#G)$
+  } else {
+    $delta_(#G)(#v.pos().at(0))$
+  }
+  return math.class("normal", glyph)
+}
 
 // #let domain(f)   = $op(frak("dom"))(#f)$
 // #let codomain(f) = $op(frak("cod"))(#f)$
 
-#let dom(f)      = $op(frak("dom"))(#f)$
-#let cod(f)      = $op(frak("cod"))(#f)$
-#let ran(f)      = $op(frak("ran"))(#f)$
+#let dom(f) = $op(frak("dom"))(#f)$
+#let cod(f) = $op(frak("cod"))(#f)$
+#let ran(f) = $op(frak("ran"))(#f)$
 
 #let fib = math.class("normal", $cal("F")$)
 #let fibonacci = math.class("normal", $cal("F")$)
@@ -75,13 +102,17 @@
 
 #let id = math.class("normal", formatting.mono("id"))
 
-#let max = formatting.mono("max")
 #let min = formatting.mono("min")
+#let max = formatting.mono("max")
+
+#let inf = formatting.mono("inf")
+#let sup = formatting.mono("sup")
 
 #let unions = math.class("unary", math.union)
 #let inters = math.class("unary", math.inter)
 #let setminus = math.class("binary", math.without)
 #let symdif = math.class("binary", math.triangle)
+#let symdiff = math.class("binary", math.triangle)
 
 // #show sym.union.over: sym.gt.eq.slant
 #let sets = (
@@ -106,6 +137,8 @@
 }
 #let striing = string.with(finite: false)
 #let len = $formatting.mono(weight: "medium", "len")$
+
+#let isomorphic = math.class("relation", math.tilde.equiv)
 
 #let st = math.mid(math.bar.v)
 #let to = math.arrow.r

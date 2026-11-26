@@ -6,6 +6,9 @@
 #import "src/colors.typ" as colors
 #import "src/fonts.typ" as fonts
 
+#let option = box(circle(radius: 3.6pt, stroke: colors.fg + 0.6pt, fill: none))
+#let answer = box(circle(radius: 3.6pt, stroke: colors.fg + 0.6pt, fill: colors.fg))
+
 #let question = block.with(
   height: 1fr,
   width: 100%,
@@ -15,8 +18,61 @@
   sticky: true,
 )
 
-#let option = box(circle(radius: 3.6pt, stroke: colors.fg + 0.6pt, fill: none))
-#let answer = box(circle(radius: 3.6pt, stroke: colors.fg + 0.6pt, fill: colors.fg))
+#let mcq(
+  prompt: auto,
+  columns: auto,
+  row-gutter: 6pt,
+  arity: 2,
+  ..choices
+) = {
+  if prompt != auto {
+    prompt
+  }
+  let num = calc.max(arity, choices.len())
+  if num == 2 {
+    let choices = if choices.len() == 0 { (emph[True], emph[False]) } else { choices }
+    grid(
+      columns: if columns == auto { 1 } else { columns },
+      row-gutter: 6pt,
+      .. for choice in choices {
+        ([#option#h(0.8em)#choice],)
+      }
+    )
+  } else {
+    grid(
+      columns: if columns == auto { 2 } else { columns },
+      row-gutter: 6pt,
+      .. for x in choices {
+        ([#option#h(0.8em)#choice],)
+      }
+    )
+  }
+}
+// #(
+//   binary = {
+//     grid(
+//       columns: 1,
+//       row-gutter: 6pt,
+//       [#option#h(0.8em)#emph[True]],
+//       [#option#h(0.8em)#emph[False]],
+//     )
+//   },
+//   fr = {
+
+//   }
+// )
+
+// #let truefalse = 
+
+#let multiplechoice(x1, x2, x3, x4) = grid(
+  columns: (1fr, 1fr),
+  rows: 2,
+  row-gutter: 6pt,
+  [#option#h(0.8em)#x1],
+  [#option#h(0.8em)#x3],
+  [#option#h(0.8em)#x2],
+  [#option#h(0.8em)#x4],
+)
 
 #let exam(
   author: "Daniel Gonzalez Cedre",

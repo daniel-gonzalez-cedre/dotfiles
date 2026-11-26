@@ -26,5 +26,5 @@
 #import "impl/chapter.typ": chapter
 #import "impl/article.typ": article
 #import "impl/assignment.typ": problem-set, solution-set
-#import "impl/assessment.typ": exam, quiz, question, option, answer
+#import "impl/assessment.typ": exam, quiz, mcq, question, option, answer
 #import "impl/syllabus.typ": syllabus

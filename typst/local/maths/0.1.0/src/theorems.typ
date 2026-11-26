@@ -6,6 +6,7 @@
   title: "Statement",
   style: "italic",
   weight: "bold",
+  fill: auto,
   number: none,
   numbering: true,
   section: false,

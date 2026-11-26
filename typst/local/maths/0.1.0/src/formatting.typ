@@ -26,7 +26,7 @@
   level: 0,
   fill: auto,
   gap: 1.4em,
-) = {
+) = context {
   let brace = if delimiter == "line" {
     math.underline
   } else if delimiter == "brace" {
@@ -40,19 +40,27 @@
   } else {
     panic()
   }
-  box({
-    place(
-      bottom + center,
-      dy: level*gap + 1.4em,
-      brace(
-        hide(
-          text(top-edge: "ascender", bottom-edge: "descender")[$#body$]
-        ),
-        if fill == auto { math-text[#annotation] } else { math-text(fill: fill)[#annotation] }
+  let payload = if query(selector(math.equation).before(here())).last().block {
+    $ body $
+  } else {
+    $body$
+  }
+  box(
+    height: measure(payload).height,
+    {
+      place(
+        bottom + center,
+        dy: level*gap + 1.4em,
+        brace(
+          hide(
+            text(top-edge: "ascender", bottom-edge: "descender")[#payload]
+          ),
+          if fill == auto { math-text[#annotation] } else { math-text(fill: fill)[#annotation] }
+        )
       )
-    )
-    $#body$
-  })
+      payload
+    }
+  )
 }
 
 #let over(
@@ -62,7 +70,7 @@
   level: 0,
   fill: auto,
   gap: -1.4em,
-) = {
+) = context {
   let brace = if delimiter == "line" {
     math.overline
   } else if delimiter == "brace" {
@@ -76,17 +84,25 @@
   } else {
     panic()
   }
-  box({
-    place(
-      top + center,
-      dy: -level*gap - 1.2em,
-      brace(
-        hide(
-          text(top-edge: "ascender", bottom-edge: "descender")[$#body$]
-        ),
-        if fill == auto { math-text[#annotation] } else { math-text(fill: fill)[#annotation] }
+  let payload = if query(selector(math.equation).before(here())).last().block {
+    $ body $
+  } else {
+    $body$
+  }
+  box(
+    height: measure(payload).height,
+    {
+      place(
+        top + center,
+        dy: -level*gap - 1.2em,
+        brace(
+          hide(
+            text(top-edge: "ascender", bottom-edge: "descender")[#payload]
+          ),
+          if fill == auto { math-text[#annotation] } else { math-text(fill: fill)[#annotation] }
+        )
       )
-    )
-    $#body$
-  })
+      payload
+    }
+  )
 }

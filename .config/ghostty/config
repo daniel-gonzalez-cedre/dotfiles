@@ -1,15 +1,20 @@
 # AVAILABLE FONTS:
+#   "Dosage"
 #   "TX-02"
 #   "Berkeley Mono"
 #   "FiraCode Retina"
 #   "CommitMono-450-01111-00000011000"
+
 # font-family = "CommitMono-450-01111-00000011000"
-font-family = "TX-02"
-# font-style = "Medium"
-# font-style-italic = "Medium Oblique"
-# font-style-bold = "ExtraBold"
-# font-style-bold-italic = "ExtraBold Oblique"
+
+font-family = "Dosage"
+font-family = "TX-02"  # FALLBACK FONT
+font-style = "Mono"
 font-size = 10
+
+# font-family = "TX-02"
+# font-family = "Medium"
+# font-size = 10
 
 # SYNTHETIC FONT STYLE GENERATION
 font-synthetic-style = false
